@@ -4,31 +4,29 @@
 
 Hey there! 👋
 
-I'm a B.Tech student at the [Computer Science and Engineering](https://www.mbm.ac.in/deptt-of-computer-science-engineering) department of [MBM University](https://www.mbm.ac.in/).
+I'm Suyash Singh, a first-year B.Tech student at the [Your Department](https://your-department-link) department of [Your College](https://your-college-link).
 
-🚀 Passionate about Open Source, I've contributed to various organizations, helping build and improve projects that benefit the community. Coding for Open Source is not just a hobby for me — *it's a way of life!*
+🚀 I'm excited about [Open Source / Web Development / whatever you like] and want to start contributing to projects that benefit the community. *Every big journey starts with a first commit!*
 
-💻 With 6 months of experience as a full stack developer, I'm constantly evolving and embracing new technologies.
+💻 I'm just starting my development journey and learning something new every day.
 
-🌱 Currently diving deep into Next.js, TypeScript, and WebSockets, while also working on building my own library.
+🌱 Currently learning [e.g., HTML, CSS, JavaScript, Python, C++], and working on [your small project or goal].
 
-🤝 Always excited to collaborate on impactful Open Source projects.
+🤝 Always open to learning from others and collaborating on beginner-friendly projects.
 
-Let's build something amazing together! 🌟
+Let's learn and build something great together! 🌟
 
 
 ## Contact
 
 Contact me by:
 
-- Email: [aakash@gmail.com](mailto:aakash6263264@gmail.com)
-- Github: [@aakashsharma003](https://github.com/macOS-Portfolio)
-- GSSOC: [GSSOC Contributer](https://gssoc.girlscript.tech/)
-- Linkedin: [aakashsharma003](https://www.linkedin.com/in/aakashsharma003)
-- Personal Website: [dev.me](https://aakash-sharma.vercel.app)
+- Email: [your-email@gmail.com](mailto:your-email@gmail.com)
+- Github: [@your-username](https://github.com/your-username)
+- Linkedin: [your-linkedin-id](https://www.linkedin.com/in/your-linkedin-id)
+- Personal Website: [your-site](https://your-site-link) *(remove if you don't have one yet)*
 
 
 ## Resume
 
-- download: [English](https://drive.google.com/file/d/1EDQQZQvAWodAMgEdycBP7E_6UmmVlz-x/view?usp=sharing)
-
+- download: [English](https://your-resume-link)
