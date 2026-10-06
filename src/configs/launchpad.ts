@@ -2,12 +2,6 @@ import type { LaunchpadData } from "~/types";
 
 const launchpadApps: LaunchpadData[] = [
   {
-    id: "library",
-    title: "Library",
-    img: "img/icons/launchpad/library-icon.png",
-    link: "https://github.com/aakashsharma003/lib"
-  },
-  {
     id: "skill-exchange",
     title: "SkillExchange",
     img: "img/icons/launchpad/skill-exchange.png", // background should be black

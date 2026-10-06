@@ -13,8 +13,7 @@ const terminal: TerminalData[] = [
         content: (
           <div className="py-1">
             <div>
-              Hi, this is Akash. I am a Btech student at the Computer Science and
-              Engineering department of MBM University.
+              Hi, this is Suyash. I'm a student and developer.
             </div>
           </div>
         )
@@ -39,58 +38,14 @@ const terminal: TerminalData[] = [
         content: (
           <ul className="list-disc ml-6">
             <li>
-              Email:{" "}
-              <a
-                className="text-blue-300"
-                href="mailto:aakash6263264@gmail.com"
-                target="_blank"
-                rel="noreferrer"
-              >
-                aakash6263264@gmail.com
-              </a>
-            </li>
-            <li>
               Github:{" "}
               <a
                 className="text-blue-300"
-                href="https://github.com/aakashsharma003"
+                href="https://github.com/s4yush"
                 target="_blank"
                 rel="noreferrer"
               >
-                @aakashsharma
-              </a>
-            </li>
-            <li>
-              Linkedin:{" "}
-              <a
-                className="text-blue-300"
-                href="https://www.linkedin.com/in/aakashsharma003"
-                target="_blank"
-                rel="noreferrer"
-              >
-                akash-sharma
-              </a>
-            </li>
-            <li>
-              Personal Website:{" "}
-              <a
-                className="text-blue-300"
-                href="https://aakash-sharma.vercel.app"
-                target="_blank"
-                rel="noreferrer"
-              >
-                https://aakash-sharma.vercel.app
-              </a>
-            </li>
-            <li>
-              X:{" "}
-              <a
-                className="text-blue-300"
-                href="https://x.com/aakashsharma003"
-                target="_blank"
-                rel="noreferrer"
-              >
-               find me on x.com
+                @s4yush
               </a>
             </li>
           </ul>

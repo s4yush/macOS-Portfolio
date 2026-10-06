@@ -37,50 +37,51 @@ const bear: BearData[] = [
       {
         id: "paytm-web",
         title: "PaytmWeb",
-        file: "https://raw.githubusercontent.com/aakashsharma003/PaytmWeb/main/README.md",
+        file: "markdown/project-coming-soon.md",
         icon: "i-ph:credit-card",
-        excerpt: "A demonstration Project For Paytm transactions...",
-        link: "https://github.com/aakashsharma003/paytm-web"
+        excerpt: "Coming soon"
       },
       {
         id: "portfolio-macos",
         title: "Portfolio macOS",
-        file: "https://raw.githubusercontent.com/aakashsharma003/macOS-Portfolio/main/README.md",
+        file: "markdown/project-coming-soon.md",
         icon: "i-ph:desktop",
-        excerpt: "My portfolio website simulating macOS's GUI...",
-        link: "https://github.com/aakashsharma003/macos-portfolio"
+        excerpt: "Coming soon"
       },
       {
         id: "medium-2.0",
         title: "Medium 2.0",
-        file: "https://raw.githubusercontent.com/aakashsharma003/Medium/main/README.md",
+        file: "markdown/project-coming-soon.md",
         icon: "i-ph:globe",
-        excerpt: "A medium modified version with serverless backend...",
-        link: "https://github.com/aakashsharma003/Medium"
+        excerpt: "Coming soon"
       },
       {
         id: "attendance-web",
         title: "Mbm Attendance Web",
-        file: "https://raw.githubusercontent.com/aakashsharma003/Mbm-Attendance-Application/main/README.md",
+        file: "markdown/project-coming-soon.md",
         icon: "i-ph:clipboard-text",
-        excerpt: "A attendance website for mbm university...",
-        link: "https://github.com/aakashsharma003/Mbm-Attendance-Application"
+        excerpt: "Coming soon"
       },
       {
         id: "aero-pay",
         title: "AeroPay",
-        file: "https://raw.githubusercontent.com/aakashsharma003/AeroPay/main/README.md",
+        file: "markdown/project-coming-soon.md",
         icon: "i-ph:money",
-        excerpt: "A payment transactions simulator...",
-        link: "https://github.com/aakashsharma003/AeroPay"
+        excerpt: "Coming soon"
+      },
+      {
+        id: "bss",
+        title: "BSS",
+        file: "markdown/bss-coming-soon.md",
+        icon: "i-ph:rocket-launch",
+        excerpt: "Coming soon"
       },
       {
         id: "rasl",
         title: "rasl",
-        file: "https://raw.githubusercontent.com/Open-Source-Collab-Community/rasl/main/README.md",
+        file: "markdown/project-coming-soon.md",
         icon: "i-ph:headphones",
-        excerpt: "A audio streaming library...",
-        link: "https://github.com/Open-Source-Collab-Community/rasl"
+        excerpt: "Coming soon"
       }
     ]
   }

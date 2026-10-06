@@ -1,6 +1,6 @@
 # macOS Tahoe Portfolio
 
-**Live Demo:** [https://aakash-sharma.vercel.app](https://aakash-sharma.vercel.app)
+**Source code:** [github.com/s4yush/macOS-Portfolio](https://github.com/s4yush/macOS-Portfolio)
 
 I've never owned a MacBook. But I've always been kind of obsessed with how macOS looks and feels — the way everything just... flows. So at some point I stopped wishing and started building.
 

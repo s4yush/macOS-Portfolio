@@ -6,38 +6,26 @@ import type { ChatMessage } from "~/utils/groq";
 
 type SiriPhase = "idle" | "recording" | "processing" | "speaking" | "error";
 
-//  Akash resume context for conversational answers 
-const AKASH_INFO = `Akash Sharma is a B.Tech Computer Science & Engineering student at MBM University, Jodhpur.
-He is deeply passionate about Open Source and has contributed to various organizations and communities including GSSOC (GirlScript Summer of Code).
-With solid experience as a full-stack developer, he works with React, Node.js, TypeScript, Next.js, MongoDB, PostgreSQL, and WebSockets.
-He has built several impressive projects:
-- Library (a library management app)
-- SkillExchange (a platform for exchanging skills)
-- ShareCode (a code sharing platform)
-- Paytm Web (a Paytm-like transaction demo)
-- MBM Attendance App (attendance management for MBM University)
-- This very macOS-style portfolio website!
-Contact: Email aakash6263264@gmail.com | GitHub @aakashsharma003 | LinkedIn: aakashsharma003
-Personal Website: aakash-sharma.vercel.app
-His resume is available for download.`;
+// Suyash's resume context for conversational answers
+const SUYASH_INFO = `This portfolio belongs to Suyash Singh. His resume is available for download.`;
 
-const SIRI_FALLBACK = "Hey, I appreciate the curiosity! But I can only perform actions that Akash has set up for me. He built me to help navigate his portfolio — try asking me to open an app, play music, toggle dark mode, or check the time!";
+const SIRI_FALLBACK = "Hey, I appreciate the curiosity! Suyash set me up to help navigate this portfolio — try asking me to open an app, play music, toggle dark mode, or check the time!";
 
-const SYSTEM_PROMPT = `You are Siri, a friendly and chill virtual assistant running inside Akash Sharma's macOS-style web portfolio.
+const SYSTEM_PROMPT = `You are Siri, a friendly and chill virtual assistant running inside Suyash Singh's macOS-style web portfolio.
 You control the interface through tool calls. Keep replies short, warm, and conversational (1-2 sentences max).
 Use a casual, friendly tone — like talking to a buddy. Say things like "Sure thing!", "You got it!", "No worries!", "Here you go!".
 
-Here is info about Akash (use this when someone asks about him or his resume):
-${AKASH_INFO}
+Here is info about Suyash (use this when someone asks about him or his resume):
+${SUYASH_INFO}
 
 IMPORTANT RULES:
 1. If you don't understand the request, or it is unrelated to the portfolio, reply EXACTLY: "${SIRI_FALLBACK}"
-2. If asked about Akash, his skills, experience, resume, or background — ALWAYS call the download_resume tool AND in your reply, share a brief friendly summary about Akash (mention he's a B.Tech CS student at MBM University, passionate open source contributor, skilled full-stack developer with React, Node.js, TypeScript, and has built awesome projects). Make it sound like you're genuinely proud of him!
+2. If asked about Suyash or his resume, call the download_resume tool. Only share personal details present in the provided portfolio or resume context; do not invent qualifications or contact details.
 3. For time/date questions, use the get_current_time tool.
 4. Always prefer calling a tool over giving instructions.
 5. Never hallucinate capabilities you don't have. If unsure, use the fallback message from rule 1.
-6. You can open the launchpad to show Akash's projects, open Spotify to play music, toggle fullscreen, and more.
-7. Never say "I am Akash" — you are Siri, built BY Akash.`;
+6. You can open the launchpad to show the portfolio's projects, open Spotify to play music, toggle fullscreen, and more.
+7. Never say "I am Suyash" — you are Siri, built by Suyash.`;
 
 //  Tool definitions 
 const TOOLS = [
@@ -52,8 +40,8 @@ const TOOLS = [
   { type: "function", function: { name: "close_app", description: "Closes an app window.", parameters: { type: "object", properties: { app_id: { type: "string", description: "One of: safari, spotify, bear, terminal, vscode, facetime, typora" } }, required: ["app_id"] } } },
   { type: "function", function: { name: "get_current_time", description: "Returns the current date and time." } },
   { type: "function", function: { name: "toggle_fullscreen", description: "Toggles full screen mode." } },
-  { type: "function", function: { name: "download_resume", description: "Downloads Akash's resume PDF. Call this whenever the user asks about Akash, his background, skills, experience, or wants to see his resume." } },
-  { type: "function", function: { name: "open_launchpad", description: "Opens the Launchpad overlay to show Akash's projects." } },
+  { type: "function", function: { name: "download_resume", description: "Downloads Suyash's resume PDF when asked about Suyash or his resume." } },
+  { type: "function", function: { name: "open_launchpad", description: "Opens the Launchpad overlay to show the portfolio's projects." } },
   { type: "function", function: { name: "play_spotify", description: "Opens Spotify app to play music." } }
 ];
 
@@ -147,7 +135,7 @@ export default function Siri({ closeSiri }: { closeSiri?: () => void }) {
     // console.log("[Tool]  Triggering resume download");
     const link = document.createElement("a");
     link.href = "/resume.pdf";
-    link.download = "Akash_Sharma_Resume.pdf";
+    link.download = "Suyash_Singh_Resume.pdf";
     link.target = "_blank";
     document.body.appendChild(link);
     link.click();
@@ -230,7 +218,7 @@ export default function Siri({ closeSiri }: { closeSiri?: () => void }) {
 
       case "download_resume":
         downloadResume();
-        return "Here's Akash's resume! He's a super talented full-stack dev and open source enthusiast. The download should start right up!";
+        return "Here's Suyash's resume. The download should start right up!";
 
       case "toggle_fullscreen": {
         try {
@@ -252,7 +240,7 @@ export default function Siri({ closeSiri }: { closeSiri?: () => void }) {
 
       case "open_launchpad": {
         window.dispatchEvent(new CustomEvent("siri:openLaunchpad"));
-        return "Opening up the Launchpad! Check out Akash's cool projects.";
+        return "Opening up the Launchpad! Check out the projects.";
       }
 
       case "play_spotify": {

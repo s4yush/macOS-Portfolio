@@ -139,8 +139,8 @@ export default function AboutThisMacModal({ show, onClose }: AboutThisMacModalPr
 
             {/* Copyright */}
             <div style={{ textAlign: "center", padding: "0 16px 14px", fontSize: 10, color: "rgba(0,0,0,0.35)", lineHeight: 1.5 }}>
-              <div>Akash Sharma</div>
-              <div>© 2024–2025 Akash. All rights reserved.</div>
+              <div>Suyash Singh</div>
+              <div>© 2026 Suyash Singh. All rights reserved.</div>
             </div>
           </motion.div>
         </>

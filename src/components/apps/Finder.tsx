@@ -41,7 +41,7 @@ const FILESYSTEM: Record<string, FileItem[]> = {
       icon: "/img/icons/sf-icons/folder.svg",
       color: "#F5A623",
       children: [
-        { id: "resume", name: "Akash_Resume.pdf", kind: "file", ext: "pdf", size: "340 KB", date: "Jun 1", icon: "/img/icons/sf-icons/doc.svg" },
+        { id: "resume", name: "Suyash_Resume.pdf", kind: "file", ext: "pdf", size: "340 KB", date: "Jun 1", icon: "/img/icons/sf-icons/doc.svg" },
         { id: "cover", name: "CoverLetter.docx", kind: "file", ext: "docx", size: "28 KB", date: "Jun 2", icon: "/img/icons/sf-icons/doc.svg" },
         { id: "projects-folder", name: "Projects", kind: "folder", date: "Jun 3", icon: "/img/icons/sf-icons/folder.svg", color: "#F5A623" },
       ],
@@ -236,7 +236,7 @@ export default function Finder() {
   const goForward = () => { };
 
   const locationLabel = () => {
-    if (location === "home") return "Akash";
+    if (location === "home") return "Suyash";
     const item = FILESYSTEM.home.find((f) => f.id === location);
     if (item) return item.name;
     for (const root of FILESYSTEM.home) {
@@ -695,7 +695,7 @@ export default function Finder() {
         {pathStack.map((seg, i) => {
           const label =
             seg === "home"
-              ? "Akash"
+              ? "Suyash"
               : FILESYSTEM.home.find((f) => f.id === seg)?.name ?? seg;
           const isActive = i === pathStack.length - 1;
           return (
@@ -867,7 +867,7 @@ export default function Finder() {
         {pathStack.map((seg, i) => {
           const label =
             seg === "home"
-              ? "Akash"
+              ? "Suyash"
               : FILESYSTEM.home.find((f) => f.id === seg)?.name ??
               seg;
           return (

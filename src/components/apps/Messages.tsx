@@ -64,7 +64,7 @@ const CONVERSATIONS: Conversation[] = [
     preview: "New star on macOS-Portfolio!",
     time: "3h",
     messages: [
-      { id: "1", text: "⭐ aakashsharma003/macOS-Portfolio received a new star!", from: "them", time: "7:00 AM" },
+      { id: "1", text: "⭐ s4yush/macOS-Portfolio received a new star!", from: "them", time: "7:00 AM" },
       { id: "2", text: "🔔 New issue opened: 'Feature request: Dark mode improvements'", from: "them", time: "7:30 AM" },
     ],
   },

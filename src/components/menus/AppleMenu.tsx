@@ -116,7 +116,7 @@ export default function AppleMenu({
       <MenuItem onClick={handleShut}>Shut Down...</MenuItem>
       <div className="h-px bg-gray-300 dark:bg-white/10 my-1 mx-2" />
       <MenuItem onClick={logout} hint="⌃⌘Q">Lock Screen</MenuItem>
-      <MenuItem onClick={logout} hint="⇧⌘Q">Log Out Akash...</MenuItem>
+      <MenuItem onClick={logout} hint="⇧⌘Q">Log Out Suyash...</MenuItem>
     </div>
   );
 }
