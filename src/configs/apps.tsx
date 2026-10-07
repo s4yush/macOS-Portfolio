@@ -97,7 +97,7 @@ const apps: AppsData[] = [
   },
   {
     id: "spotify",
-    title: "Aakash Suyash",
+    title: "spotify",
     desktop: true,
     width: 860,
     height: 500,
