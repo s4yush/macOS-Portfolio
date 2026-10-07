@@ -13,7 +13,6 @@ export default function Boot({ restart, sleep, setBooting }: BootProps) {
   const [showContent, setShowContent] = useState(false);
 
   useEffect(() => {
-    // Fade in the Apple logo
     const timer = setTimeout(() => setShowContent(true), 100);
     return () => clearTimeout(timer);
   }, []);

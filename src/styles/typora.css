@@ -6,7 +6,7 @@
   @apply outline-none;
 }
 
-/* headings */
+/* Editor headings. */
 
 .typora h1,
 .typora h2,
@@ -41,7 +41,7 @@
   @apply text-base text-[#777];
 }
 
-/* basic */
+/* Links and paragraph spacing. */
 
 .typora a {
   @apply text-[#4183C4] dark:text-blue-400;
@@ -55,7 +55,7 @@
   @apply my-3 mx-0;
 }
 
-/* listings */
+/* Lists. */
 
 .typora li > ol,
 .typora li > ul {
@@ -85,7 +85,7 @@
   @apply list-decimal;
 }
 
-/* tables */
+/* Tables. */
 
 .typora .tableWrapper {
   @apply overflow-x-auto;
@@ -119,7 +119,7 @@
   @apply mb-0;
 }
 
-/* code */
+/* Code blocks. */
 
 .typora :not(pre) > code,
 .typora pre {

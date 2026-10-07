@@ -16,10 +16,8 @@ export default function Maps() {
     ? PLACES.filter((p) => p.name.toLowerCase().includes(search.toLowerCase()))
     : PLACES;
 
-  // Simple SVG map representation
   const MapView = () => (
     <div style={{ position: "relative", width: "100%", height: "100%", overflow: "hidden" }}>
-      {/* Map background */}
       <div
         style={{
           width: "100%",
@@ -33,18 +31,15 @@ export default function Maps() {
           position: "relative",
         }}
       >
-        {/* Roads */}
         <svg
           style={{ position: "absolute", inset: 0, width: "100%", height: "100%" }}
           viewBox="0 0 400 300"
           preserveAspectRatio="xMidYMid slice"
         >
-          {/* Main roads */}
           <line x1="0" y1="150" x2="400" y2="150" stroke={mapStyle === "satellite" ? "rgba(255,255,255,0.3)" : "white"} strokeWidth="6" />
           <line x1="200" y1="0" x2="200" y2="300" stroke={mapStyle === "satellite" ? "rgba(255,255,255,0.3)" : "white"} strokeWidth="6" />
           <line x1="0" y1="80" x2="400" y2="220" stroke={mapStyle === "satellite" ? "rgba(255,255,255,0.2)" : "rgba(255,255,255,0.8)"} strokeWidth="3" />
           <line x1="0" y1="220" x2="400" y2="80" stroke={mapStyle === "satellite" ? "rgba(255,255,255,0.2)" : "rgba(255,255,255,0.8)"} strokeWidth="3" />
-          {/* Blocks */}
           {[60, 130, 270, 340].map((x) =>
             [50, 110, 190, 250].map((y) => (
               <rect
@@ -64,10 +59,8 @@ export default function Maps() {
               />
             ))
           )}
-          {/* Water */}
           <ellipse cx="320" cy="230" rx="60" ry="40" fill={mapStyle === "satellite" ? "rgba(20,60,100,0.7)" : "rgba(140,190,230,0.7)"} />
 
-          {/* Place pins */}
           {PLACES.map((place, i) => {
             const x = 80 + i * 80;
             const y = 60 + (i % 2) * 80;
@@ -90,7 +83,6 @@ export default function Maps() {
           })}
         </svg>
 
-        {/* Map style switcher */}
         <div
           style={{
             position: "absolute",
@@ -127,7 +119,6 @@ export default function Maps() {
           ))}
         </div>
 
-        {/* Zoom controls */}
         <div
           style={{
             position: "absolute",
@@ -164,7 +155,6 @@ export default function Maps() {
           ))}
         </div>
 
-        {/* Active place card */}
         <motion.div
           key={activePlace.id}
           initial={{ opacity: 0, y: 10 }}
@@ -230,13 +220,12 @@ export default function Maps() {
       style={{
         display: "flex",
         height: "100%",
-        
+
         background: "#e8e8e0",
         borderRadius: "0 0 14px 14px",
         overflow: "hidden",
       }}
     >
-      {/* Sidebar */}
       <div
         style={{
           width: "220px",
@@ -247,7 +236,6 @@ export default function Maps() {
           flexDirection: "column",
         }}
       >
-        {/* Search */}
         <div style={{ padding: "10px" }}>
           <div
             style={{
@@ -276,7 +264,6 @@ export default function Maps() {
           </div>
         </div>
 
-        {/* Favourites */}
         <div
           style={{
             fontSize: "10px",
@@ -340,7 +327,6 @@ export default function Maps() {
         ))}
       </div>
 
-      {/* Map */}
       <div style={{ flex: 1, position: "relative" }}>
         <MapView />
       </div>

@@ -25,7 +25,7 @@ interface DesktopState {
   showNotificationCenter: boolean;
 }
 
-// Build the initial state map from apps config — includes ALL apps
+// Initialize window state for every configured app.
 function buildInitialState(): Pick<DesktopState, "showApps" | "appsZ" | "maxApps" | "minApps"> {
   const showApps: { [key: string]: boolean } = {};
   const appsZ: { [key: string]: number } = {};
@@ -74,25 +74,25 @@ export default function Desktop(props: MacActions) {
     window.dispatchEvent(new CustomEvent("launchpad:openSafari"));
   };
 
-  // Listen for cross-component events and global keyboard shortcuts
+  // Handle app-launch events and system keyboard shortcuts.
   useEffect(() => {
     const handleOpenSafari = () => {
       toggleLaunchpad(false);
       openApp("safari");
     };
     const handleOpenLaunchpad = () => toggleLaunchpad(true);
-    
+
     const handleKeyDown = (e: KeyboardEvent) => {
-      // System independent Command key (Cmd on Mac, Ctrl on Windows/Linux)
+      // Support Command on macOS and Control on other platforms.
       const isCmdOrCtrl = e.metaKey || e.ctrlKey;
 
-      // Spotlight: Cmd/Ctrl + Space
+      // Open Spotlight with Command/Control + Space.
       if (isCmdOrCtrl && e.code === 'Space') {
         e.preventDefault();
         toggleSpotlight();
       }
 
-      // Full screen: Cmd/Ctrl + F OR F11
+      // Toggle full screen with Command/Control + F or F11.
       if ((isCmdOrCtrl && e.key.toLowerCase() === 'f') || e.key === 'F11') {
         e.preventDefault();
         if (isFullScreen()) {
@@ -104,14 +104,14 @@ export default function Desktop(props: MacActions) {
         }
       }
 
-      // Brightness Down: Cmd/Ctrl + Down Arrow OR F1
+      // Lower brightness with Command/Control + Down or F1.
       if ((isCmdOrCtrl && e.key === 'ArrowDown') || e.key === 'F1') {
         e.preventDefault();
         const currentBrightness = useStore.getState().brightness as number;
         useStore.getState().setBrightness(Math.max(currentBrightness - 10, 1));
       }
 
-      // Brightness Up: Cmd/Ctrl + Up Arrow OR F2
+      // Raise brightness with Command/Control + Up or F2.
       if ((isCmdOrCtrl && e.key === 'ArrowUp') || e.key === 'F2') {
         e.preventDefault();
         const currentBrightness = useStore.getState().brightness as number;
@@ -122,7 +122,7 @@ export default function Desktop(props: MacActions) {
     window.addEventListener("launchpad:openSafari", handleOpenSafari);
     window.addEventListener("siri:openLaunchpad", handleOpenLaunchpad);
     window.addEventListener("keydown", handleKeyDown);
-    
+
     return () => {
       window.removeEventListener("launchpad:openSafari", handleOpenSafari);
       window.removeEventListener("siri:openLaunchpad", handleOpenLaunchpad);
@@ -193,7 +193,7 @@ export default function Desktop(props: MacActions) {
       const showApps = { ...prev.showApps, [id]: true };
       const appsZ = { ...prev.appsZ, [id]: maxZ };
 
-      // Un-minimize if needed
+      // Restore a minimized window before focusing it.
       const minApps = { ...prev.minApps };
       if (minApps[id]) {
         const win = document.querySelector(`#window-${id}`) as HTMLElement;
@@ -287,7 +287,6 @@ export default function Desktop(props: MacActions) {
       style={bgStyle}
       onContextMenu={handleContextMenu}
     >
-      {/* Top Menu Bar */}
       <TopBar
         title={state.currentTitle}
         setLogin={props.setLogin}
@@ -303,10 +302,8 @@ export default function Desktop(props: MacActions) {
         openAboutMac={() => setShowAboutMac(true)}
       />
 
-      {/* Dynamic Island */}
       <DynamicIsland currentApp={state.currentTitle} />
 
-      {/* Desktop-pinned widgets — top-left, always visible, matches Tahoe ref */}
       <div
         style={{
           position: "fixed",
@@ -327,7 +324,6 @@ export default function Desktop(props: MacActions) {
         </div>
       </div>
 
-      {/* Desktop Icons - top-right */}
       <div
         style={{
           position: "fixed",
@@ -367,15 +363,12 @@ export default function Desktop(props: MacActions) {
         </div>
       )}
 
-      {/* Desktop App Windows */}
       <div className="window-bound absolute" style={{ top: minMarginY, zIndex: 60, pointerEvents: "none" }}>
         {renderAppWindows()}
       </div>
 
-      {/* About This Mac modal */}
       <AboutThisMacModal show={showAboutMac} onClose={() => setShowAboutMac(false)} />
 
-      {/* Spotlight */}
       {state.spotlight && (
         <Spotlight
           openApp={openApp}
@@ -385,16 +378,13 @@ export default function Desktop(props: MacActions) {
         />
       )}
 
-      {/* Launchpad */}
       <Launchpad show={state.showLaunchpad} toggleLaunchpad={toggleLaunchpad} />
 
-      {/* Notification Center */}
       <NotificationCenter
         show={state.showNotificationCenter}
         onClose={toggleNotificationCenter}
       />
 
-      {/* Dock */}
       <Dock
         open={openApp}
         showApps={state.showApps}
@@ -403,7 +393,6 @@ export default function Desktop(props: MacActions) {
         hide={state.hideDockAndTopbar}
       />
 
-      {/* Context Menu */}
       <ContextMenu
         x={contextMenu.x}
         y={contextMenu.y}

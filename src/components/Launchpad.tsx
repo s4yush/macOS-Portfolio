@@ -28,7 +28,7 @@ export default function Launchpad({ show, toggleLaunchpad }: LaunchpadProps) {
   const AppIcon = ({ src, alt, className = "" }: { src: string; alt: string; className?: string }) => {
     const isLibrary = src.includes("library-icon");
     const isSkillExchange = src.includes("skill-exchange");
-    
+
     return (
       <div 
         className={`${className} overflow-hidden flex items-center justify-center border border-black/10 dark:border-white/10 ${isSkillExchange ? 'bg-black' : 'bg-white'}`}
@@ -77,7 +77,7 @@ export default function Launchpad({ show, toggleLaunchpad }: LaunchpadProps) {
     window.dispatchEvent(new CustomEvent("launchpad:openSafari"));
   };
 
-  // Group apps into rows of ITEMS_PER_FOLDER; last group becomes a "More" folder if it has fewer items
+  // Split apps into fixed-size groups and collect any remainder in More.
   const filteredApps = search();
   const mainApps = filteredApps.slice(0, ITEMS_PER_FOLDER * 2);
   const folderApps = filteredApps.slice(ITEMS_PER_FOLDER * 2);
@@ -106,7 +106,6 @@ export default function Launchpad({ show, toggleLaunchpad }: LaunchpadProps) {
               WebkitBackdropFilter: 'blur(50px) saturate(200%)',
             }}
           >
-            {/* Search bar */}
             <motion.div
               className="mx-auto flex items-center mt-6"
               style={{
@@ -137,7 +136,6 @@ export default function Launchpad({ show, toggleLaunchpad }: LaunchpadProps) {
               />
             </motion.div>
 
-            {/* App Grid */}
             <div
               className="max-w-[1100px] mx-auto mt-10 w-full px-4 sm:px-10"
               grid="~ flow-row cols-4 sm:cols-7"
@@ -176,7 +174,6 @@ export default function Launchpad({ show, toggleLaunchpad }: LaunchpadProps) {
                 </motion.div>
               ))}
 
-              {/* Folder icon for overflow apps */}
               {hasFolder && (
                 <motion.div
                   h="32 sm:36"
@@ -192,7 +189,6 @@ export default function Launchpad({ show, toggleLaunchpad }: LaunchpadProps) {
                     onMouseEnter={(e) => { (e.currentTarget as HTMLElement).style.transform = 'scale(1.1)'; }}
                     onMouseLeave={(e) => { (e.currentTarget as HTMLElement).style.transform = 'scale(1)'; }}
                   >
-                    {/* Folder grid */}
                     <div
                       style={{
                         width: '100%',
@@ -234,7 +230,6 @@ export default function Launchpad({ show, toggleLaunchpad }: LaunchpadProps) {
               )}
             </div>
 
-            {/* Folder expanded overlay */}
             <AnimatePresence>
               {openFolder && (
                 <motion.div
@@ -283,7 +278,6 @@ export default function Launchpad({ show, toggleLaunchpad }: LaunchpadProps) {
               )}
             </AnimatePresence>
 
-            {/* Page dots */}
             <motion.div
               className="flex justify-center mt-8 space-x-1.5"
               initial={{ opacity: 0 }}

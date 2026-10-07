@@ -68,8 +68,7 @@ export default function Mobile(props: MacActions) {
         onLeftTap={() => setShowNotificationCenter(!showNotificationCenter)}
         onRightTap={() => setShowControlCenter(!showControlCenter)}
       />
-      
-      {/* Invisible Swipe Zones for Mobile Gestures */}
+
       <div
         ref={statusBarLeftRef}
         className="fixed top-0 left-0 w-1/2 h-12 z-[9990] pointer-events-auto"
@@ -103,7 +102,6 @@ export default function Mobile(props: MacActions) {
         }}
       />
 
-      {/* Control Center */}
       <AnimatePresence>
         {showControlCenter && (
           <ControlCenterMenu
@@ -117,13 +115,11 @@ export default function Mobile(props: MacActions) {
         )}
       </AnimatePresence>
 
-      {/* Notification Center */}
       <NotificationCenter
         show={showNotificationCenter}
         onClose={() => setShowNotificationCenter(false)}
       />
 
-      {/* Home Screen (App Grid + Dock) */}
       <AnimatePresence>
         {!activeApp && (
           <motion.div 
@@ -133,7 +129,6 @@ export default function Mobile(props: MacActions) {
             transition={{ duration: 0.3 }}
             className="absolute inset-0 flex flex-col pt-14"
           >
-              {/* App Grid */}
              <div className="flex-1 px-5 pt-6">
                 <div className="grid grid-cols-4 gap-x-3 gap-y-7">
                   {apps
@@ -157,13 +152,11 @@ export default function Mobile(props: MacActions) {
                 </div>
              </div>
 
-             {/* Dock */}
              <MobileDock openApp={openApp} />
           </motion.div>
         )}
       </AnimatePresence>
 
-      {/* Active App Window */}
       <AnimatePresence>
         {activeApp && (
           <motion.div
@@ -174,7 +167,6 @@ export default function Mobile(props: MacActions) {
             transition={{ type: "spring", damping: 25, stiffness: 200 }}
             className="absolute inset-0 z-40 bg-white/85 dark:bg-[#1c1c1e]/85 backdrop-blur-2xl"
           >
-             {/* Render the active app's content inside a mobile container */}
              <div className="w-full h-full pt-12 relative overflow-hidden flex flex-col">
                <div className="flex-1 overflow-y-auto no-scrollbar relative">
                  {(() => {
@@ -184,7 +176,6 @@ export default function Mobile(props: MacActions) {
                  })()}
                </div>
 
-               {/* Home Indicator line at the bottom to go back */}
                <div className="absolute bottom-1 left-0 right-0 h-6 flex items-end justify-center pb-2 cursor-pointer z-50 bg-gradient-to-t from-white/80 dark:from-black/80 to-transparent" onClick={closeApp}>
                  <div className="w-1/3 h-1.5 bg-black dark:bg-white rounded-full opacity-80 hover:opacity-100 transition-opacity" />
                </div>

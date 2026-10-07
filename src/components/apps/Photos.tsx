@@ -8,7 +8,7 @@ interface Photo {
   liked?: boolean;
 }
 
-// Using Picsum for placeholder photos
+// The gallery uses remote Picsum images as sample photos.
 const PHOTOS: Photo[] = [
   { id: "1", url: "https://picsum.photos/seed/macos1/400/300", label: "Jodhpur Sunset", date: "Jun 1, 2025" },
   { id: "2", url: "https://picsum.photos/seed/macos2/400/300", label: "Mehrangarh Fort", date: "May 28, 2025", liked: true },
@@ -61,15 +61,15 @@ export default function Photos() {
       <style>{`
         .mobile-only { display: none !important; }
         .mobile-only-block { display: none !important; }
-        
+
         @media (max-width: 768px) {
           .mobile-only { display: flex !important; }
           .mobile-only-block { display: block !important; }
           .desktop-only { display: none !important; }
-          
+
           .photos-sidebar { display: none !important; }
           .photos-main-area { background: #F2F2F7 !important; }
-          
+
           .photos-header {
             padding: 24px 20px 8px 20px !important;
             border-bottom: none !important;
@@ -79,7 +79,7 @@ export default function Photos() {
             position: relative;
             display: flex !important;
           }
-          
+
           .photos-header-title {
             font-size: 28px !important;
             font-weight: 700 !important;
@@ -88,13 +88,13 @@ export default function Photos() {
             margin-bottom: 2px !important;
             line-height: 1.2 !important;
           }
-          
+
           .photos-header-subtitle {
             font-size: 13px !important;
             color: #8E8E93 !important;
             margin-left: 0 !important;
           }
-          
+
           .photos-select-btn {
             position: absolute;
             top: 24px;
@@ -108,7 +108,7 @@ export default function Photos() {
             border: none;
             cursor: pointer;
           }
-          
+
           .photos-mobile-chips {
             flex-direction: row !important;
             overflow-x: auto !important;
@@ -120,7 +120,7 @@ export default function Photos() {
             box-sizing: border-box;
           }
           .photos-mobile-chips::-webkit-scrollbar { display: none; }
-          
+
           .photos-chip {
             background: #E5E5EA !important;
             border-radius: 16px !important;
@@ -136,17 +136,17 @@ export default function Photos() {
             background: #000 !important;
             color: #fff !important;
           }
-          
+
           .photos-grid-container {
             padding: 0 !important;
             padding-bottom: 83px !important;
           }
-          
+
           .photos-grid {
             grid-template-columns: repeat(3, 1fr) !important;
             gap: 2px !important;
           }
-          
+
           .photo-thumb {
             aspect-ratio: 1/1 !important;
             border-radius: 4px !important;
@@ -157,9 +157,9 @@ export default function Photos() {
             transform: scale(0.97) !important;
             transition: transform 0.1s !important;
           }
-          
+
           .photo-hover-label, .photo-like-badge { display: none !important; }
-          
+
           .mobile-tab-bar {
             position: absolute;
             bottom: 0;
@@ -177,7 +177,7 @@ export default function Photos() {
             display: flex !important;
             box-sizing: border-box;
           }
-          
+
           .mobile-tab-item {
             display: flex;
             flex-direction: column;
@@ -189,9 +189,9 @@ export default function Photos() {
             cursor: pointer;
             width: 80px;
           }
-          
+
           .mobile-tab-item.active { color: #007AFF; }
-          
+
           @media (prefers-color-scheme: dark) {
             .photos-main-area, .photos-header, .photos-mobile-chips { background: #000 !important; }
             .photos-header-title { color: #fff !important; }
@@ -202,7 +202,6 @@ export default function Photos() {
           }
         }
       `}</style>
-      {/* Sidebar */}
       <div
         className="photos-sidebar"
         style={{
@@ -289,7 +288,6 @@ export default function Photos() {
         })}
       </div>
 
-      {/* Grid */}
       <div className="photos-main-area" style={{ flex: 1, display: "flex", flexDirection: "column", overflow: "hidden", background: "var(--c-bg)" }}>
         <div
           className="photos-header"
@@ -304,7 +302,7 @@ export default function Photos() {
         >
           <span className="desktop-only">{ALBUMS.find((a) => a.id === activeAlbum)?.label}</span>
           <span className="mobile-only-block photos-header-title">Library</span>
-          
+
           <span
             className="photos-header-subtitle"
             style={{
@@ -374,7 +372,6 @@ export default function Photos() {
                 style={{ width: "100%", height: "100%", objectFit: "cover", display: "block" }}
                 loading="lazy"
               />
-              {/* hover label */}
               <div
                 style={{
                   position: "absolute",
@@ -403,7 +400,6 @@ export default function Photos() {
         </div>
       </div>
 
-      {/* Lightbox */}
       <AnimatePresence>
         {viewPhoto && (
           <motion.div
@@ -442,7 +438,6 @@ export default function Photos() {
                 boxShadow: "0 32px 96px rgba(0,0,0,0.6), 0 8px 32px rgba(0,0,0,0.3)",
               }}
             />
-            {/* Glass info panel */}
             <motion.div
               initial={{ opacity: 0, y: 14 }}
               animate={{ opacity: 1, y: 0 }}
@@ -511,7 +506,6 @@ export default function Photos() {
         )}
       </AnimatePresence>
 
-      {/* Mobile Tab Bar */}
       <div className="mobile-only mobile-tab-bar">
         <div 
           className="mobile-tab-item active"

@@ -34,7 +34,7 @@ export default function Dock({
     if (id === "launchpad") toggleLaunchpad(!showLaunchpad);
     else {
       toggleLaunchpad(false);
-      // Trigger bounce animation
+      // Bounce the dock icon after it is opened.
       if (!showApps[id]) {
         setBouncingApp(id);
         setTimeout(() => setBouncingApp(null), 700);
@@ -47,7 +47,7 @@ export default function Dock({
   const { winWidth } = useWindowSize();
   const isMobile = winWidth < 768;
 
-  // Find separator position (between desktop apps and external links)
+  // Separate installed apps from external links.
   const desktopApps = apps.filter(app => {
     if (app.hideFromDock) return false;
     if (!app.desktop && app.id !== 'launchpad') return false;
@@ -80,7 +80,6 @@ export default function Dock({
         mass: 0.8,
       }}
     >
-      {/* Ambient glow beneath dock */}
       <div
         aria-hidden
         style={{
@@ -123,7 +122,6 @@ export default function Dock({
           />
         ))}
 
-        {/* Separator */}
         {externalApps.length > 0 && (
           <li className="flex items-center mx-1.5" style={{ height: `${dockSize / 16}rem` }}>
             <div

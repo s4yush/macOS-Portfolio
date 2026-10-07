@@ -16,7 +16,7 @@ const WEATHER_DATA = {
   ],
 };
 
-// SF Symbol-style SVG weather icons
+// Inline SVGs keep the weather icons consistent with the system interface.
 const WeatherIcon = ({ type, size = 36 }: { type: string; size?: number }) => {
   const s = size;
   if (type === "sunny") return (
@@ -41,13 +41,11 @@ const WeatherIcon = ({ type, size = 36 }: { type: string; size?: number }) => {
       <path d="M5 13a5 5 0 1 1 9.9-1H16a3 3 0 0 1 0 6H7a4 4 0 0 1-2-7.46" stroke="rgba(200,210,230,0.8)" strokeWidth="1.5" fill="rgba(200,210,230,0.12)"/>
     </svg>
   );
-  // Moon icon (for night / partly-cloudy-night)
   if (type === "moon") return (
     <svg width={s} height={s} viewBox="0 0 24 24" fill="none">
       <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z" stroke="rgba(200,220,255,0.9)" strokeWidth="1.6" fill="rgba(160,180,255,0.15)" strokeLinejoin="round"/>
     </svg>
   );
-  // partly-cloudy default
   return (
     <svg width={s} height={s} viewBox="0 0 24 24" fill="none">
       <circle cx="9" cy="8.5" r="3.5" fill="#FFD60A" opacity="0.95"/>
@@ -85,11 +83,9 @@ export default function WeatherWidget({ compact }: WeatherWidgetProps) {
         userSelect: "none",
         width: 162,
       }}>
-        {/* Location */}
         <div style={{ fontSize: 11, fontWeight: 600, color: "rgba(255,255,255,0.72)", marginBottom: 4 }}>
           {WEATHER_DATA.location}
         </div>
-        {/* Big temp */}
         <div style={{
           fontSize: 48,
           fontWeight: 200,
@@ -101,7 +97,6 @@ export default function WeatherWidget({ compact }: WeatherWidgetProps) {
         }}>
           {WEATHER_DATA.temp}°
         </div>
-        {/* Alert row */}
         <div style={{
           display: "flex",
           alignItems: "center",
@@ -120,7 +115,6 @@ export default function WeatherWidget({ compact }: WeatherWidgetProps) {
 
   return (
     <div style={{ ...GLASS, borderRadius: 18, padding: "16px 18px", userSelect: "none", width: 200 }}>
-      {/* Top row */}
       <div style={{ display: "flex", justifyContent: "space-between", alignItems: "flex-start" }}>
         <div>
           <div style={{ fontSize: 13, color: "rgba(255,255,255,0.65)", marginBottom: 4, fontWeight: 500 }}>
@@ -136,14 +130,12 @@ export default function WeatherWidget({ compact }: WeatherWidgetProps) {
         <WeatherIcon type="partly-cloudy" size={48} />
       </div>
 
-      {/* Stats */}
       <div style={{ display: "flex", gap: 14, marginTop: 12, paddingTop: 10, borderTop: "0.5px solid rgba(255,255,255,0.09)" }}>
         <span style={{ fontSize: 11, color: "rgba(255,255,255,0.55)" }}>H:{WEATHER_DATA.high}° L:{WEATHER_DATA.low}°</span>
         <span style={{ fontSize: 11, color: "rgba(255,255,255,0.55)" }}>💧 {WEATHER_DATA.humidity}%</span>
         <span style={{ fontSize: 11, color: "rgba(255,255,255,0.55)" }}>💨 {WEATHER_DATA.wind}km/h</span>
       </div>
 
-      {/* Alert */}
       <div style={{
         display: "flex",
         alignItems: "center",

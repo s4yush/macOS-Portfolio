@@ -1,6 +1,6 @@
 const GROQ_API_URL = "https://api.groq.com/openai/v1";
 
-// Models ordered by preference - will fallback down the list
+// Try models in order so a temporary model failure does not stop the request.
 const CHAT_MODELS = [
     "llama-3.3-70b-versatile",
     "llama3-70b-8192",
@@ -64,7 +64,6 @@ export async function getGroqChatCompletion(
                 max_tokens: 1024
             };
 
-            // Only include tools if the model supports them
             if (tools && tools.length > 0) {
                 body.tools = tools;
                 body.tool_choice = "auto";
@@ -85,11 +84,9 @@ export async function getGroqChatCompletion(
 
             const errText = await response.text();
             lastError = `${model}: ${response.status} - ${errText}`;
-            // console.warn(`Model ${model} failed, trying next fallback...`, lastError);
             continue;
         } catch (err: any) {
             lastError = `${model}: ${err.message}`;
-            // console.warn(`Model ${model} threw error, trying next fallback...`, err);
             continue;
         }
     }

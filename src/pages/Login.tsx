@@ -68,7 +68,6 @@ export default function Login(props: MacActions) {
               animate={{ opacity: 1, y: 0, scale: 1 }}
               transition={{ duration: 0.5, delay: 0.1, ease: [0.25, 0.1, 0.25, 1] }}
             >
-              {/* Avatar with ring */}
               <div
                 style={{
                   width: '88px',
@@ -91,7 +90,6 @@ export default function Login(props: MacActions) {
                 />
               </div>
 
-              {/* Name */}
               <div
                 className="font-display"
                 style={{
@@ -106,7 +104,6 @@ export default function Login(props: MacActions) {
                 {user.name}
               </div>
 
-              {/* Login button styled as password field */}
               <motion.div
                 className="flex justify-center items-center mt-3"
                 initial={{ opacity: 0, y: 10 }}
@@ -151,7 +148,6 @@ export default function Login(props: MacActions) {
                 </button>
               </motion.div>
 
-              {/* Touch ID hint */}
               <motion.div
                 style={{
                   marginTop: '16px',
@@ -167,7 +163,6 @@ export default function Login(props: MacActions) {
               </motion.div>
             </motion.div>
 
-            {/* Power buttons */}
             <motion.div
               className="fixed bottom-12 inset-x-0 mx-auto flex flex-row space-x-6 w-max"
               initial={{ opacity: 0, y: 20 }}
@@ -232,7 +227,6 @@ export default function Login(props: MacActions) {
             exit={{ opacity: 0, scale: 1.05 }}
             transition={{ duration: 0.6 }}
           >
-            {/* Lock screen clock */}
             <motion.div
               className="flex flex-col items-center"
               style={{ paddingTop: 'clamp(60px, 12vh, 120px)' }}
@@ -268,7 +262,6 @@ export default function Login(props: MacActions) {
               </div>
             </motion.div>
 
-            {/* Click to unlock hint */}
             <motion.div
               style={{
                 paddingBottom: '48px',

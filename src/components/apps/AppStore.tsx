@@ -136,10 +136,9 @@ function FeaturedCard({ app, index }: { app: AppEntry; index: number }) {
             onError={(e) => { e.currentTarget.style.display = 'none'; }}
           />
         ) : null}
-        {/* Fallback pattern if image is missing */}
         <div style={{ position: "absolute", opacity: 0.1, backgroundImage: "radial-gradient(circle at 2px 2px, white 1px, transparent 0)", backgroundSize: "16px 16px", inset: 0 }} />
       </div>
-      
+
       <div 
         style={{ 
             flex: 1,
@@ -208,12 +207,12 @@ function AppRow({ app, index, showBorder = true }: { app: AppEntry; index: numbe
       whileHover={{ backgroundColor: "var(--c-bg-tertiary)", borderRadius: "8px", paddingLeft: "8px", paddingRight: "8px", margin: "0 -8px" }}
     >
       <AppIcon icon={app.icon} color={app.color} size={64} />
-      
+
       <div style={{ flex: 1, minWidth: 0, marginLeft: "16px", paddingRight: "16px" }}>
         <div style={{ fontSize: "15px", fontWeight: 600, color: "var(--c-text)", letterSpacing: "-0.2px", whiteSpace: "nowrap", overflow: "hidden", textOverflow: "ellipsis" }}>{app.name}</div>
         <div style={{ fontSize: "13px", color: "var(--c-text-secondary)", marginTop: "2px", whiteSpace: "nowrap", overflow: "hidden", textOverflow: "ellipsis" }}>{app.subtitle || app.category}</div>
       </div>
-      
+
       <button
         style={{
           background: "var(--c-bg-tertiary)",
@@ -264,7 +263,6 @@ export default function AppStore() {
         overflow: "hidden",
       }}
     >
-      {/* Sidebar - Liquid Glass */}
       <div
         className="mac-sidebar"
         style={{
@@ -281,7 +279,6 @@ export default function AppStore() {
           gap: "4px"
         }}
       >
-        {/* Search */}
         <div style={{ marginBottom: "20px", padding: "0 4px" }}>
             <div style={{ 
                 display: "flex", 
@@ -323,8 +320,7 @@ export default function AppStore() {
             </button>
           );
         })}
-        
-        {/* User Account Item at the bottom */}
+
         <div style={{ flex: 1 }} />
         <button
           style={{
@@ -352,20 +348,17 @@ export default function AppStore() {
         </button>
       </div>
 
-      {/* Main Content */}
       <div style={{ flex: 1, overflowY: "auto", background: "var(--c-bg)", position: "relative", WebkitFontSmoothing: "antialiased" }}>
         {activeTab === "discover" ? (
           <div style={{ padding: "48px 56px", maxWidth: "1040px", margin: "0 auto" }}>
-            
-            {/* Header */}
+
             <div style={{ display: "flex", alignItems: "center", justifyContent: "space-between", marginBottom: "24px", borderBottom: "0.5px solid var(--c-border)", paddingBottom: "16px" }}>
               <h1 style={{ fontSize: "34px", fontWeight: 700, color: "var(--c-text)", margin: 0, letterSpacing: "-0.5px" }}>Discover</h1>
               <div style={{ display: "flex", gap: "16px", color: "var(--c-text-secondary)" }}>
                 <span className="i-ph:bell" style={{ width: "22px", height: "22px", cursor: "pointer" }} />
               </div>
             </div>
-            
-            {/* Horizontal Scroll section (Large Featured Cards) */}
+
             <div style={{ marginBottom: "56px" }}>
               <div style={{ display: "flex", gap: "24px", overflowX: "auto", paddingBottom: "24px", margin: "0 -8px", padding: "0 8px 24px", scrollSnapType: "x mandatory", WebkitOverflowScrolling: "touch" }}>
                 {FEATURED.map((app, i) => (
@@ -376,20 +369,17 @@ export default function AppStore() {
               </div>
             </div>
 
-            {/* List Section (Top Charts / New Apps) */}
             <div>
               <div style={{ display: "flex", alignItems: "center", justifyContent: "space-between", marginBottom: "24px" }}>
                 <h2 style={{ fontSize: "24px", fontWeight: 700, color: "var(--c-text)", margin: 0, letterSpacing: "-0.3px" }}>Top Projects</h2>
                 <span style={{ fontSize: "15px", color: "var(--system-blue, #007AFF)", cursor: "pointer", fontWeight: 500 }}>See All</span>
               </div>
               <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: "0 64px" }}>
-                {/* Column 1 */}
                 <div style={{ display: "flex", flexDirection: "column" }}>
                   {TOP_CHARTS.map((app, i) => (
                     <AppRow key={app.id} app={app} index={i} showBorder={i !== TOP_CHARTS.length - 1} />
                   ))}
                 </div>
-                {/* Column 2 */}
                 <div style={{ display: "flex", flexDirection: "column" }}>
                   {FEATURED.map((app, i) => (
                     <AppRow key={app.id} app={app} index={i + TOP_CHARTS.length} showBorder={i !== FEATURED.length - 1} />

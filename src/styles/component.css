@@ -1,9 +1,7 @@
-/* ========================================
-   macOS 26 Tahoe — Liquid Glass Design System
-   ======================================== */
+/* Shared Liquid Glass design tokens. */
 
 :root {
-  /* Liquid Glass Core */
+  /* Glass surfaces and effects. */
   --lg-bg-clear: rgba(255, 255, 255, 0.18);
   --lg-bg-tinted: rgba(255, 255, 255, 0.38);
   --lg-bg-solid: rgba(255, 255, 255, 0.72);
@@ -25,7 +23,7 @@
   --lg-inner-highlight: inset 0 0.5px 0 rgba(255, 255, 255, 0.45);
   --lg-inner-highlight-strong: inset 0 1px 0 rgba(255, 255, 255, 0.6);
 
-  /* Shadows */
+  /* Layer shadows. */
   --shadow-window: 0 24px 80px rgba(0,0,0,0.22), 0 8px 30px rgba(0,0,0,0.12);
   --shadow-window-focused: 0 28px 90px rgba(0,0,0,0.28), 0 10px 35px rgba(0,0,0,0.16);
   --shadow-menu: 0 12px 40px rgba(0,0,0,0.18), 0 4px 12px rgba(0,0,0,0.08);
@@ -33,7 +31,7 @@
   --shadow-tooltip: 0 4px 16px rgba(0,0,0,0.12);
   --shadow-dynamic-island: 0 4px 24px rgba(0,0,0,0.3), 0 1px 6px rgba(0,0,0,0.15);
 
-  /* Tahoe Radii */
+  /* Corner radii. */
   --radius-window: 14px;
   --radius-menu: 16px;
   --radius-dock: 22px;
@@ -42,7 +40,7 @@
   --radius-island: 36px;
   --radius-island-expanded: 24px;
 
-  /* Spring & Timing */
+  /* Motion curves. */
   --spring-bounce: cubic-bezier(0.175, 0.885, 0.32, 1.275);
   --spring-snappy: cubic-bezier(0.25, 0.1, 0.25, 1);
   --spring-gentle: cubic-bezier(0.34, 1.56, 0.64, 1);
@@ -50,14 +48,14 @@
   --ease-out-expo: cubic-bezier(0.19, 1, 0.22, 1);
   --ease-smooth: cubic-bezier(0.25, 0.1, 0.25, 1);
 
-  /* Typography */
+  /* System font stacks. */
   --font-system: 'SF Pro Text', -apple-system, BlinkMacSystemFont, 'Inter', 'Helvetica Neue', system-ui, sans-serif;
   --font-display: 'SF Pro Display', -apple-system, BlinkMacSystemFont, 'Inter', 'Helvetica Neue', system-ui, sans-serif;
   --font-mono: 'SF Mono', 'Menlo', 'Monaco', 'Consolas', monospace;
   --font-rounded: 'SF Pro Rounded', -apple-system, ui-rounded, 'Inter', 'Helvetica Neue', sans-serif;
   --font-avenir: 'Avenir Next LT Pro', 'Helvetica Neue', SFCompactRounded, -apple-system, Roboto, Oxygen, Ubuntu, 'Fira Sans', 'Droid Sans', sans-serif;
 
-  /* Accent Colors */
+  /* Accent palette. */
   --accent-blue: #007AFF;
   --accent-purple: #AF52DE;
   --accent-pink: #FF2D55;
@@ -68,7 +66,7 @@
   --accent-graphite: #8E8E93;
 }
 
-/* Dark Mode */
+/* Dark appearance overrides. */
 .dark {
   --lg-bg-clear: rgba(30, 30, 30, 0.25);
   --lg-bg-tinted: rgba(40, 40, 40, 0.45);
@@ -84,12 +82,10 @@
   --lg-glow: 0 0 40px rgba(0, 0, 0, 0.15);
 }
 
-/* --------- Login --------- */
 .login input::placeholder {
   @apply text-white;
 }
 
-/* --------- Spotlight --------- */
 .spotlight {
   @apply fixed z-20 h-max top-1/4 -mt-16 w-165 -ml-82.5 left-1/2;
   background: rgba(246, 246, 248, 0.85);
@@ -119,7 +115,7 @@
   }
 }
 
-/* --------- App Window --------- */
+/* App windows. */
 .window-bound {
   width: 300%;
   height: 200%;
@@ -154,7 +150,7 @@
   filter: brightness(0.7);
 }
 
-/* --------- Dock (Liquid Glass) --------- */
+/* Dock. */
 .dock ul {
   box-shadow: var(--shadow-dock), var(--lg-inner-highlight), inset 0 -0.5px 0 rgba(0,0,0,0.06);
   background: var(--lg-bg-dock);
@@ -192,7 +188,7 @@
   border: var(--lg-border);
 }
 
-/* --------- Slider --------- */
+/* Sliders. */
 .slider .rangeslider {
   @apply bg-c-300 w-full h-7 shadow-none m-0 rounded-r-full border-t border-r border-b border-transparent;
 }
@@ -210,7 +206,7 @@
   @apply hidden;
 }
 
-/* Switch Toggle */
+/* Switches. */
 .switch-toggle {
   @apply relative inline-block h-5.5 w-9.5;
 }
@@ -240,7 +236,7 @@
   box-shadow: 0 0 1px #3b82f6;
 }
 
-/* --------- Menu Box --------- */
+/* Menus. */
 .menu-box {
   background: var(--lg-bg-menu);
   backdrop-filter: var(--lg-blur-menu);
@@ -257,7 +253,7 @@
   border-top: 0.5px solid rgba(255,255,255,0.16);
 }
 
-/* --------- Control Center Grid --------- */
+/* Control Center. */
 .cc-grid {
   background: var(--lg-bg-tinted);
   backdrop-filter: var(--lg-blur-light);
@@ -280,7 +276,7 @@
   border: var(--lg-border-subtle);
 }
 
-/* --------- Animations --------- */
+/* Interface animations. */
 @keyframes windowOpen {
   from { opacity: 0; transform: scale(0.88); }
   to { opacity: 1; transform: scale(1); }
@@ -330,7 +326,7 @@
   animation: dockReceive 350ms cubic-bezier(0.32, 0.72, 0, 1);
 }
 
-/* Dynamic Island */
+/* Dynamic Island animations. */
 @keyframes islandPulse {
   0%, 100% { transform: scaleX(1); }
   50% { transform: scaleX(1.02); }
@@ -341,7 +337,7 @@
   to { width: 360px; height: auto; border-radius: var(--radius-island-expanded); }
 }
 
-/* Notification Center */
+/* Notification Center animations. */
 @keyframes slideInFromRight {
   from { opacity: 0; transform: translateX(100%); }
   to { opacity: 1; transform: translateX(0); }
@@ -352,7 +348,7 @@
   to { opacity: 0; transform: translateX(100%); }
 }
 
-/* Launchpad */
+/* Launchpad animations. */
 @keyframes launchpadIn {
   from { opacity: 0; transform: scale(1.15); }
   to { opacity: 1; transform: scale(1); }
@@ -381,7 +377,7 @@
   animation: launchpadIconIn 0.4s var(--spring-bounce) forwards;
 }
 
-/* --------- Liquid Glass Utility Classes --------- */
+/* Reusable glass surfaces. */
 .lg-panel {
   background: var(--lg-bg-clear);
   backdrop-filter: var(--lg-blur);
@@ -414,21 +410,13 @@
   border-top: 0.5px solid rgba(255,255,255,0.42);
 }
 
-/* Photos app thumbnail label reveal */
 .photo-thumb:hover .photo-hover-label {
   opacity: 1 !important;
 }
 
-/* ========================================
-   Shared macOS materials (used across apps)
-   ======================================== */
-
-/* --- macOS-style overlay scrollbars ---
-   Thin, rounded, translucent; track stays invisible. Applied globally
-   so every scrollable surface (Finder, Notes, Settings, Mail…) reads as
-   native macOS instead of the chunky platform default. */
+/* Shared scrollbar and text-selection styles. */
 * {
-  scrollbar-width: thin;                              /* Firefox */
+  scrollbar-width: thin;
   scrollbar-color: rgba(0, 0, 0, 0.28) transparent;
 }
 .dark * {
@@ -463,7 +451,6 @@
 ::-webkit-scrollbar-corner {
   background: transparent;
 }
-/* Opt-out for surfaces that should never show a bar (e.g. the dock row) */
 .no-scrollbar::-webkit-scrollbar {
   display: none;
 }
@@ -471,7 +458,6 @@
   scrollbar-width: none;
 }
 
-/* --- Accent-tinted text selection (matches macOS highlight) --- */
 ::selection {
   background: rgba(0, 122, 255, 0.28);
 }
@@ -479,13 +465,7 @@
   background: rgba(10, 132, 255, 0.4);
 }
 
-/* ========================================
-   Appearance settings — driven by root data-attributes
-   (set in index.tsx from the System Settings → Appearance panel)
-   ======================================== */
-
-/* Window chrome tint. Default ON = wallpaper-tinted glass (current look);
-   OFF = neutral, less-saturated chrome. AppWindow reads --window-bar-bg. */
+/* Appearance settings driven by root data attributes. */
 :root {
   --window-bar-bg: var(--lg-bg-tinted);
 }
@@ -497,9 +477,7 @@
   --window-bar-bg: rgba(46, 46, 48, 0.72);
 }
 
-/* Icon & widget style — applied to dock app icons.
-   Default: untouched. Dark: dimmed. Clear: glassy/desaturated.
-   Tinted: monochrome leaning on the accent. */
+/* Dock icon appearance variants. */
 [data-icon-style="dark"] .dock img {
   filter: brightness(0.82) contrast(1.06);
 }

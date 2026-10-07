@@ -93,7 +93,6 @@ const NavPage = ({ width, setGoURL }: NavProps) => {
         <NavSection section={websites.favorites} setGoURL={setGoURL} width={width} />
         <NavSection section={websites.freq} setGoURL={setGoURL} width={width} />
 
-        {/* Privacy Report */}
         <div style={{ margin: "0 auto", width: "100%", maxWidth: "800px", padding: "48px 16px 64px" }}>
           <div style={{ fontWeight: 600, fontSize: width < 640 ? "20px" : "24px", color: "var(--lg-text-primary, #1c1c1e)", marginBottom: "16px" }}>
             Privacy Report
@@ -197,7 +196,6 @@ const Safari = ({ width = 800 }: SafariProps) => {
 
   return (
     <div style={{ width: "100%", height: "100%", display: "flex", flexDirection: "column", background: "var(--lg-bg)", }}>
-      {/* browser topbar */}
       <div 
         style={{ 
             display: "flex", 
@@ -317,7 +315,6 @@ const Safari = ({ width = 800 }: SafariProps) => {
         </div>
       </div>
 
-      {/* browser content */}
       <div style={{ flex: 1, position: "relative", zIndex: 0 }}>
         {wifi ? (
             state.goURL === "" ? (

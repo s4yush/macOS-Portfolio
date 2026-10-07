@@ -110,7 +110,7 @@ const Window = (props: WindowProps) => {
   const [state, setState] = useState<WindowState>({
     width: initWidth,
     height: initHeight,
-    // + winWidth because of the boundary offset (window-bound is sized 2× viewport)
+    // The boundary is twice the viewport width, so account for its offset.
     x: winWidth + (winWidth - initWidth) / 2 + (props.x || 0),
     y: (winHeight - initHeight - dockSize - minMarginY) / 2 + (props.y || 0),
   });
@@ -165,7 +165,6 @@ const Window = (props: WindowProps) => {
       className={`overflow-hidden ${round} ${minimized}`}
       id={`window-${props.id}`}
     >
-      {/* macOS Tahoe Liquid Glass window shell */}
       <motion.div
         initial={{ opacity: 0, scale: 0.3, y: "100vh", borderRadius: 28 }}
         animate={{ opacity: 1, scale: 1, y: 0, borderRadius: props.max ? 0 : 12 }}
@@ -194,7 +193,6 @@ const Window = (props: WindowProps) => {
           transition: "box-shadow 0.3s ease",
         }}
       >
-        {/* Tahoe title bar */}
         {props.titlebar !== "hidden" && (
           <div
             className="window-bar relative text-center"
@@ -242,7 +240,6 @@ const Window = (props: WindowProps) => {
           </div>
         )}
 
-        {/* Window content */}
         <motion.div 
           className="w-full overflow-y-hidden" 
           style={{ height: props.titlebar === "transparent" || props.titlebar === "hidden" ? "100%" : "calc(100% - 32px)" }}

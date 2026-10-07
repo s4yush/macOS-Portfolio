@@ -1,29 +1,27 @@
 # About Me
 
-## Introduction
+## Hi, I'm Suyash Singh
 
-Hey there! 👋
+I'm a first-year B.Tech student and developer, learning by building projects and exploring how thoughtful interfaces can make software feel better to use.
 
-I'm Suyash Singh, a first-year B.Tech student.
+## What I'm focused on
 
-🚀 I'm excited about [Open Source / Web Development / whatever you like] and want to start contributing to projects that benefit the community. *Every big journey starts with a first commit!*
+- Building full-stack projects with the MERN stack
+- Learning something new through hands-on development
+- Contributing to open source and collaborating with other developers
+- Looking for an SDE internship where I can keep growing
 
-💻 I'm just starting my development journey and learning something new every day.
+## Selected projects
 
-🌱 Currently learning [e.g., HTML, CSS, JavaScript, Python, C++], and working on [your small project or goal].
-
-🤝 Always open to learning from others and collaborating on beginner-friendly projects.
-
-Let's learn and build something great together! 🌟
-
+- [SkillExchange](https://skill-exchange-fe.vercel.app/) — a project about sharing skills.
+- [ShareCode](https://share-your-codes.vercel.app/) — a code-sharing project.
+- [Paytm Web](https://paytm-web.vercel.app/) — a web project in the Paytm category.
+- [MBM Attendance](https://mbm-attendance-web.vercel.app/) — an attendance-focused project.
 
 ## Contact
 
-Contact me by:
-
-- Github: [@s4yush](https://github.com/s4yush)
-
+The best place to find me is [GitHub](https://github.com/s4yush). I'm open to learning, collaboration, and beginner-friendly open-source contributions.
 
 ## Resume
 
-- download: [English](/resume.pdf)
+[Download my resume (PDF)](/resume.pdf)

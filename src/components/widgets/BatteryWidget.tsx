@@ -31,7 +31,6 @@ export default function BatteryWidget() {
         gap: 12,
       }}
     >
-      {/* Battery icon */}
       <div style={{ position: "relative", width: 36, height: 18 }}>
         <div style={{
           width: 32, height: 18,

@@ -31,7 +31,7 @@ export default function Clock() {
   const [alarms, setAlarms] = useState(ALARMS);
   const [stopwatch, setStopwatch] = useState({ running: false, elapsed: 0, laps: [] as number[] });
   const swRef = useRef<ReturnType<typeof setInterval> | null>(null);
-  // Timer: `total` is the configured duration (ms), `remaining` counts down.
+  // Keep the configured duration separate from the live countdown.
   const [timer, setTimer] = useState({ running: false, total: 5 * 60 * 1000, remaining: 5 * 60 * 1000 });
   const tmRef = useRef<ReturnType<typeof setInterval> | null>(null);
 
@@ -40,7 +40,7 @@ export default function Clock() {
     return () => clearInterval(t);
   }, []);
 
-  // Stopwatch
+  // Stopwatch state and controls.
   useEffect(() => {
     if (stopwatch.running) {
       swRef.current = setInterval(() => {
@@ -52,7 +52,7 @@ export default function Clock() {
     return () => { if (swRef.current) clearInterval(swRef.current); };
   }, [stopwatch.running]);
 
-  // Timer countdown
+  // Timer state and countdown.
   useEffect(() => {
     if (timer.running) {
       tmRef.current = setInterval(() => {
@@ -103,7 +103,6 @@ export default function Clock() {
     return h >= 6 && h < 20;
   };
 
-  // Analog clock
   const sec = time.getSeconds();
   const min = time.getMinutes();
   const hr = time.getHours() % 12;
@@ -113,9 +112,7 @@ export default function Clock() {
 
   const AnalogClock = ({ size = 120 }: { size?: number }) => (
     <svg width={size} height={size} viewBox="0 0 120 120">
-      {/* Face */}
       <circle cx="60" cy="60" r="58" fill="var(--c-bg-secondary, rgba(30,30,35,0.95))" stroke="var(--c-border, rgba(255,255,255,0.1))" strokeWidth="1" />
-      {/* Hour markers */}
       {Array.from({ length: 12 }).map((_, i) => {
         const angle = (i * 30 * Math.PI) / 180;
         const x1 = 60 + 50 * Math.sin(angle);
@@ -124,7 +121,6 @@ export default function Clock() {
         const y2 = 60 - 54 * Math.cos(angle);
         return <line key={i} x1={x1} y1={y1} x2={x2} y2={y2} stroke="var(--c-text-tertiary, rgba(255,255,255,0.4))" strokeWidth="2" strokeLinecap="round" />;
       })}
-      {/* Hour hand */}
       <line
         x1="60" y1="60"
         x2={60 + 28 * Math.sin((hrDeg * Math.PI) / 180)}
@@ -132,7 +128,6 @@ export default function Clock() {
         stroke="var(--c-text, white)" strokeWidth="3" strokeLinecap="round"
         style={{ transition: "all 0.5s ease" }}
       />
-      {/* Minute hand */}
       <line
         x1="60" y1="60"
         x2={60 + 38 * Math.sin((minDeg * Math.PI) / 180)}
@@ -140,14 +135,12 @@ export default function Clock() {
         stroke="var(--c-text, white)" strokeWidth="2" strokeLinecap="round"
         style={{ transition: "all 0.5s ease" }}
       />
-      {/* Second hand */}
       <line
         x1="60" y1="60"
         x2={60 + 44 * Math.sin((secDeg * Math.PI) / 180)}
         y2={60 - 44 * Math.cos((secDeg * Math.PI) / 180)}
         stroke="#FF3B30" strokeWidth="1.5" strokeLinecap="round"
       />
-      {/* Center dot */}
       <circle cx="60" cy="60" r="3" fill="#FF3B30" />
     </svg>
   );
@@ -171,7 +164,6 @@ export default function Clock() {
         color: "var(--c-text)",
       }}
     >
-      {/* Segmented Control Bar */}
       <div
         style={{
           display: "flex",
@@ -213,7 +205,6 @@ export default function Clock() {
         </div>
       </div>
 
-      {/* Content */}
       <div style={{ flex: 1, overflowY: "auto" }}>
         <AnimatePresence mode="wait">
           <motion.div
@@ -226,7 +217,6 @@ export default function Clock() {
           >
             {tab === "world" && (
               <div>
-                {/* Big local clock */}
                 <div style={{ display: "flex", flexDirection: "column", alignItems: "center", padding: "24px 0 16px" }}>
                   <AnalogClock size={140} />
                   <div style={{ marginTop: "12px", fontSize: "13px", color: "var(--c-text-secondary)" }}>
@@ -234,7 +224,6 @@ export default function Clock() {
                   </div>
                 </div>
 
-                {/* World clocks */}
                 <div style={{ padding: "0 16px" }}>
                   {WORLD_CLOCKS.map((clock, i) => (
                     <motion.div
@@ -323,7 +312,6 @@ export default function Clock() {
                         {alarm.label} · {alarm.days}
                       </div>
                     </div>
-                    {/* Toggle */}
                     <div
                       onClick={() =>
                         setAlarms((prev) =>
@@ -457,7 +445,6 @@ export default function Clock() {
                   gap: "22px",
                 }}
               >
-                {/* Adjust row (hidden while running) */}
                 {!timer.running && (
                   <div style={{ display: "flex", gap: "10px" }}>
                     {[
@@ -487,7 +474,6 @@ export default function Clock() {
                   </div>
                 )}
 
-                {/* Countdown display */}
                 <div
                   className="font-display font-tabular"
                   style={{
@@ -501,7 +487,6 @@ export default function Clock() {
                   {fmtTimer(timer.remaining)}
                 </div>
 
-                {/* Controls */}
                 <div style={{ display: "flex", gap: "16px" }}>
                   <button
                     onClick={() => setTimer((t) => ({ ...t, running: false, remaining: t.total }))}

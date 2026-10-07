@@ -53,7 +53,6 @@ export default function NotificationCenter({ show, onClose }: NotificationCenter
     <AnimatePresence>
       {show && (
         <>
-          {/* Transparent click-outside overlay — frosted on mobile */}
           <motion.div
             key="nc-backdrop"
             initial={{ opacity: 0 }}
@@ -71,7 +70,6 @@ export default function NotificationCenter({ show, onClose }: NotificationCenter
             onClick={onClose}
           />
 
-          {/* Staggered column of discrete glass cards */}
           <motion.div
             key="nc-cards"
             variants={isMobile ? undefined : containerVariants}
@@ -95,7 +93,6 @@ export default function NotificationCenter({ show, onClose }: NotificationCenter
             }}
             onClick={(e) => e.stopPropagation()}
           >
-            {/* Header card */}
             <motion.div
               variants={cardVariants}
               style={{ ...CARD, padding: "12px 16px", display: "flex", alignItems: "center", justifyContent: "space-between" }}
@@ -142,7 +139,6 @@ export default function NotificationCenter({ show, onClose }: NotificationCenter
               </div>
             </motion.div>
 
-            {/* Notifications card */}
             <motion.div variants={cardVariants} style={{ ...CARD, overflow: "hidden" }}>
               {notifications.length === 0 ? (
                 <div style={{ padding: "20px 16px", textAlign: "center", color: "rgba(255,255,255,0.3)", fontSize: 13 }}>
@@ -210,17 +206,14 @@ export default function NotificationCenter({ show, onClose }: NotificationCenter
               )}
             </motion.div>
 
-            {/* Weather card */}
             <motion.div variants={cardVariants}>
               <WeatherWidget />
             </motion.div>
 
-            {/* Calendar card */}
             <motion.div variants={cardVariants}>
               <CalendarWidget />
             </motion.div>
 
-            {/* Edit Widgets */}
             <motion.div variants={cardVariants} style={{ display: "flex", justifyContent: "center", paddingTop: 2 }}>
               <button
                 style={{

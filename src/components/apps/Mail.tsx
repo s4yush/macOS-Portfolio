@@ -94,13 +94,12 @@ export default function Mail() {
       style={{
         display: "flex",
         height: "100%",
-        
+
         background: "#f5f5f7",
         borderRadius: "0 0 14px 14px",
         overflow: "hidden",
       }}
     >
-      {/* Sidebar — folders */}
       <div
         style={{
           width: "160px",
@@ -184,7 +183,6 @@ export default function Mail() {
         </button>
       </div>
 
-      {/* Message list */}
       <div
         style={{
           width: "260px",
@@ -196,7 +194,6 @@ export default function Mail() {
           overflow: "hidden",
         }}
       >
-        {/* Search */}
         <div style={{ padding: "8px 10px", borderBottom: "0.5px solid rgba(0,0,0,0.08)" }}>
           <div
             style={{
@@ -245,7 +242,6 @@ export default function Mail() {
               }}
             >
               <div style={{ display: "flex", gap: "10px", alignItems: "flex-start" }}>
-                {/* Avatar */}
                 <div
                   style={{
                     width: "36px",
@@ -330,7 +326,6 @@ export default function Mail() {
         </div>
       </div>
 
-      {/* Message view */}
       <div style={{ flex: 1, display: "flex", flexDirection: "column", overflow: "hidden" }}>
         {activeMsg ? (
           <AnimatePresence mode="wait">
@@ -418,7 +413,6 @@ export default function Mail() {
         )}
       </div>
 
-      {/* Compose overlay */}
       <AnimatePresence>
         {composing && (
           <motion.div

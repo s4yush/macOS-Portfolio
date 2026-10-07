@@ -1,11 +1,11 @@
 import type { StateCreator } from "zustand";
 
-// Accent color can be a named key or a hex string
+// Accent colors accept a preset name or a custom hex value.
 export type AccentColorKey =
   | "blue" | "purple" | "pink" | "red"
   | "orange" | "yellow" | "green" | "graphite";
 
-export type AccentColor = AccentColorKey | string; // allow hex
+export type AccentColor = AccentColorKey | string;
 
 export const ACCENT_HEX: Record<AccentColorKey, string> = {
   blue: "#007AFF",
@@ -60,27 +60,23 @@ export const wallpaperSets: WallpaperSet[] = [
 ];
 
 export interface SettingsSlice {
-  // Wallpaper
   wallpaperSets: WallpaperSet[];
   activeWallpaperSet: string;
   setActiveWallpaperSet: (id: string) => void;
-  /** @deprecated use activeWallpaperSet */
+  /** @deprecated Use activeWallpaperSet instead. */
   wallpaperId: string;
   setWallpaperId: (id: string) => void;
   getWallpaper: () => WallpaperSet;
 
-  // Accent color (hex string or named key)
   accentColor: string;
   setAccentColor: (color: string) => void;
   getAccentHex: () => string;
 
-  // Dock preferences
   dockPosition: DockPosition;
   setDockPosition: (pos: DockPosition) => void;
   dockAutoHide: boolean;
   setDockAutoHide: (v: boolean) => void;
 
-  // Notification
   notificationSound: string;
   setNotificationSound: (sound: string) => void;
 }
@@ -98,12 +94,11 @@ const saveSetting = (key: string, value: unknown) => {
   try {
     localStorage.setItem(`macos-settings-${key}`, JSON.stringify(value));
   } catch {
-    // localStorage may be unavailable
+    // Continue with in-memory settings when browser storage is blocked.
   }
 };
 
 export const createSettingsSlice: StateCreator<SettingsSlice> = (set, get) => ({
-  // Wallpaper
   wallpaperSets,
   activeWallpaperSet: loadSetting("activeWallpaperSet", "tahoe"),
   setActiveWallpaperSet: (id) => {
@@ -111,7 +106,7 @@ export const createSettingsSlice: StateCreator<SettingsSlice> = (set, get) => ({
     saveSetting("wallpaperId", id);
     set({ activeWallpaperSet: id, wallpaperId: id });
   },
-  /** @deprecated */
+  /** @deprecated Use activeWallpaperSet instead. */
   wallpaperId: loadSetting("wallpaperId", "tahoe"),
   setWallpaperId: (id) => {
     saveSetting("wallpaperId", id);
@@ -123,14 +118,11 @@ export const createSettingsSlice: StateCreator<SettingsSlice> = (set, get) => ({
     return wallpaperSets.find((w) => w.id === id) ?? wallpaperSets[0];
   },
 
-  // Accent color — stored as hex string
   accentColor: loadSetting("accentColor", "#007AFF"),
   setAccentColor: (color) => {
-    // If named key, resolve to hex
     const hex = ACCENT_HEX[color as AccentColorKey] ?? color;
     saveSetting("accentColor", hex);
     set({ accentColor: hex });
-    // Apply to CSS variable
     document.documentElement.style.setProperty("--accent-primary", hex);
   },
   getAccentHex: () => {
@@ -138,21 +130,18 @@ export const createSettingsSlice: StateCreator<SettingsSlice> = (set, get) => ({
     return ACCENT_HEX[color as AccentColorKey] ?? color;
   },
 
-  // Dock position
   dockPosition: loadSetting("dockPosition", "bottom" as DockPosition),
   setDockPosition: (pos) => {
     saveSetting("dockPosition", pos);
     set({ dockPosition: pos });
   },
 
-  // Dock auto-hide
   dockAutoHide: loadSetting("dockAutoHide", false),
   setDockAutoHide: (v) => {
     saveSetting("dockAutoHide", v);
     set({ dockAutoHide: v });
   },
 
-  // Notification sound
   notificationSound: loadSetting(
     "notificationSound",
     "music/Samantha (Legacy)-2024_08_12-6.wav"

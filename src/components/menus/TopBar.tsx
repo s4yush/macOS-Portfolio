@@ -166,12 +166,10 @@ const TopBar = (props: TopBarProps) => {
         props.hide ? "z-0" : ""
       } text-sm text-white`}
       style={{
-        /* Tahoe: Fully transparent menu bar — no blur, no background */
         backdropFilter: 'none',
         WebkitBackdropFilter: 'none',
         background: 'transparent',
         zIndex: props.hide ? 0 : 99999,
-        /* Text readability via subtle drop shadow */
         textShadow: '0 0.5px 2px rgba(0,0,0,0.25)',
         transition: 'opacity 0.3s ease, transform 0.3s ease',
         opacity: props.hide ? 0 : 1,
@@ -200,7 +198,6 @@ const TopBar = (props: TopBarProps) => {
         </TopBarItem>
       </div>
 
-      {/* Open this when clicking on Apple logo */}
       {state.showAppleMenu && (
         <AppleMenu
           logout={logout}
@@ -241,12 +238,10 @@ const TopBar = (props: TopBarProps) => {
           <CCMIcon size={16} />
         </TopBarItem>
 
-        {/* Open this when clicking on Wifi button */}
         {state.showWifiMenu && (
           <WifiMenu toggleWifiMenu={toggleWifiMenu} btnRef={wifiBtnRef} />
         )}
 
-        {/* Open this when clicking on Control Center button */}
         <AnimatePresence>
           {state.showControlCenter && (
             <ControlCenterMenu
@@ -269,7 +264,6 @@ const TopBar = (props: TopBarProps) => {
         </TopBarItem>
       </div>
 
-      {/* Invisible Swipe Zones for Mobile Gestures */}
       {isMobile && (
         <>
           <div

@@ -100,7 +100,6 @@ export default function Calculator() {
         return { ...s, display: base + ".", justCalc: false };
       }
 
-      // Digit
       if (justCalc) return { ...s, display: label, justCalc: false };
       if (op && prev !== "" && !justCalc && s.display === display && display === prev) {
         return { ...s, display: label, justCalc: false };
@@ -111,7 +110,6 @@ export default function Calculator() {
     });
   };
 
-  // Keyboard input
   useEffect(() => {
     const map: Record<string, string> = {
       "0": "0", "1": "1", "2": "2", "3": "3", "4": "4",
@@ -135,7 +133,6 @@ export default function Calculator() {
         overflow: "hidden",
       }}
     >
-      {/* Display */}
       <div
         className="flex-1 flex items-end justify-end px-5 pb-3"
         style={{ minHeight: 80, background: "rgba(0,0,0,0.3)" }}
@@ -159,7 +156,6 @@ export default function Calculator() {
         </motion.span>
       </div>
 
-      {/* Buttons */}
       <div
         style={{
           display: "grid",

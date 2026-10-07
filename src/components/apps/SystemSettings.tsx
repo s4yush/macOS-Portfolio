@@ -91,8 +91,7 @@ const PANEL_GROUPS = [
   ["weather", "about"]
 ];
 
-// ─── Shared sub-components ────────────────────────────────────────────────────
-// ─── Shared sub-components ────────────────────────────────────────────────────
+// Shared controls used by multiple settings panels.
 const Toggle = ({ checked, onChange }: { checked: boolean; onChange: (v: boolean) => void }) => {
   const dark = useStore((s) => s.dark);
   return (
@@ -229,7 +228,7 @@ const Card = ({ children }: { children: React.ReactNode }) => {
   );
 };
 
-// ─── Panel Components ─────────────────────────────────────────────────────────
+// Individual settings panels.
 const GeneralPanel = () => {
   const [lang, setLang] = useState("English");
   const dark = useStore((s) => s.dark);
@@ -355,7 +354,6 @@ const AppearancePanel = () => {
       <Card>
         <Row label="Color">
           <div style={{ display: "flex", gap: "7px", alignItems: "center", flexWrap: "wrap", justifyContent: "flex-end" }}>
-            {/* Multicolor swatch */}
             <button
               title="Multicolor"
               onClick={() => setAccentColor("#007AFF")}
@@ -781,7 +779,6 @@ const DisplaysPanel = () => {
 
   return (
     <div>
-      {/* Mini Display Simulator */}
       <div style={{ display: "flex", justifyContent: "center", padding: "24px 16px 16px" }}>
         <div
           style={{
@@ -801,7 +798,6 @@ const DisplaysPanel = () => {
             transition: "filter 0.1s ease",
           }}
         >
-          {/* Dock preview */}
           <div
             style={{
               width: "80px",
@@ -811,7 +807,6 @@ const DisplaysPanel = () => {
               borderRadius: "3px",
             }}
           />
-          {/* Monitor stand */}
           <div
             style={{
               position: "absolute",
@@ -897,7 +892,6 @@ const BatteryPanel = () => {
 
   return (
     <div>
-      {/* Battery Status Display */}
       <div style={{ display: "flex", flexDirection: "column", alignItems: "center", padding: "24px 16px 12px" }}>
         <div style={{ position: "relative", width: "80px", height: "40px", border: `3.5px solid ${dark ? "#fff" : "#1c1c1e"}`, borderRadius: "8px", display: "flex", alignItems: "center", padding: "2px" }}>
           <div
@@ -909,7 +903,6 @@ const BatteryPanel = () => {
               transition: "background-color 0.2s ease, width 0.3s ease",
             }}
           />
-          {/* Battery nub */}
           <div
             style={{
               position: "absolute",
@@ -1015,7 +1008,6 @@ const StoragePanel = () => {
         </div>
       </div>
 
-      {/* Storage stacked bar */}
       <div
         style={{
           display: "flex",
@@ -1268,7 +1260,7 @@ const GenericPanel = ({ id }: { id: SettingsPanel }) => {
   );
 };
 
-// ─── Main System Settings ─────────────────────────────────────────────────────
+// System Settings app layout.
 export default function SystemSettings() {
   const [activePanel, setActivePanel] = useState<SettingsPanel>("appearance");
   const [search, setSearch] = useState("");
@@ -1313,7 +1305,6 @@ export default function SystemSettings() {
         overflow: "hidden",
       }}
     >
-      {/* ── Sidebar / List View ── */}
       {(!isMobile || mobileView === "list") && (
         <div
           style={{
@@ -1333,7 +1324,6 @@ export default function SystemSettings() {
               Settings
             </div>
           )}
-          {/* Search */}
           <div style={{ padding: isMobile ? "0 16px 16px" : "10px 12px" }}>
           <div
             style={{
@@ -1362,7 +1352,6 @@ export default function SystemSettings() {
           </div>
         </div>
 
-        {/* Items */}
         <div style={{ flex: 1, paddingBottom: isMobile ? "20px" : "0" }}>
           {isMobile && !search.trim() && (
             <div
@@ -1569,7 +1558,6 @@ export default function SystemSettings() {
       </div>
       )}
 
-      {/* ── Content ── */}
       {(!isMobile || mobileView === "panel") && (
         <div style={{ flex: 1, overflowY: "auto", display: "flex", flexDirection: "column", background: isMobile ? (dark ? "#000" : "#f2f2f7") : "transparent" }}>
           {isMobile && (
@@ -1595,7 +1583,6 @@ export default function SystemSettings() {
                 transition={{ duration: 0.18, ease: [0.25, 0.1, 0.25, 1] }}
                 style={{ paddingBottom: "24px" }}
               >
-                {/* Panel title */}
                 {!isMobile && (
                   <div
                     style={{

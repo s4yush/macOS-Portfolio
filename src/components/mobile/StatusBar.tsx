@@ -20,7 +20,7 @@ export default function StatusBar({ isAppOpen, appTitle, onLeftTap, onRightTap }
   const m = time.getMinutes().toString().padStart(2, '0');
 
   const dark = useStore((s) => s.dark);
-  
+
   return (
     <div style={{
       position: "fixed",
@@ -34,7 +34,6 @@ export default function StatusBar({ isAppOpen, appTitle, onLeftTap, onRightTap }
       background: "transparent",
       pointerEvents: "none"
     }}>
-      {/* LEFT side - Time */}
       <div 
         onClick={onLeftTap}
         style={{
@@ -53,7 +52,6 @@ export default function StatusBar({ isAppOpen, appTitle, onLeftTap, onRightTap }
         }}>{h}:{m}</span>
       </div>
 
-      {/* CENTER - Dynamic Island */}
       <div style={{
         position: "absolute",
         left: "50%", top: "8px",
@@ -64,7 +62,6 @@ export default function StatusBar({ isAppOpen, appTitle, onLeftTap, onRightTap }
         pointerEvents: "auto"
       }} />
 
-      {/* RIGHT side - Status icons row */}
       <div 
         onClick={onRightTap}
         style={{

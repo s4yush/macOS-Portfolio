@@ -26,11 +26,7 @@
   src: local("Avenir Next LT Pro DemiIt"), url("./fonts/AvenirNextLTPro-DemiItalic.woff") format("woff");
 }
 
-/* ----------------------------------------------------------------
-   Inter — free, OFL-licensed SF Pro look-alike (variable).
-   Kept AFTER -apple-system so genuine SF renders on Apple devices
-   and Inter provides the closest match everywhere else.
-   ---------------------------------------------------------------- */
+/* Inter is the fallback when the platform's native system font is unavailable. */
 @font-face {
   font-family: "Inter";
   font-style: normal;
@@ -55,35 +51,30 @@
   font-family: var(--font-mono);
 }
 
-/* Shared macOS UI text stack: real SF on Apple, Inter substitute elsewhere */
 body:not(pre) {
   font-family: var(--font-system);
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  font-feature-settings: 'cv11' 1, 'ss01' 1; /* Inter: single-story a / SF-like alternates */
+  font-feature-settings: 'cv11' 1, 'ss01' 1;
   cursor: default;
   letter-spacing: -0.01em;
 }
 
-/* macOS Display font for headings / large numerals */
 .font-display {
   font-family: var(--font-display);
   font-feature-settings: 'kern' 1, 'cv11' 1, 'ss01' 1;
   letter-spacing: -0.02em;
 }
 
-/* Rounded variant for clock / playful large display surfaces */
 .font-rounded {
   font-family: var(--font-rounded);
   font-feature-settings: 'kern' 1;
 }
 
-/* Tabular nums for clock / counters / timers */
 .font-tabular {
   font-feature-settings: 'tnum' 1, 'cv11' 1;
 }
 
-/* SF Pro Text */
 @font-face {
   font-family: "SF Pro Text";
   font-style: normal;
@@ -109,7 +100,6 @@ body:not(pre) {
   src: url("./fonts/SF-Pro-Text-Bold.otf") format("opentype");
 }
 
-/* SF Pro Display */
 @font-face {
   font-family: "SF Pro Display";
   font-style: normal;
@@ -147,7 +137,6 @@ body:not(pre) {
   src: url("./fonts/SF-Pro-Display-Black.otf") format("opentype");
 }
 
-/* SF Pro Rounded */
 @font-face {
   font-family: "SF Pro Rounded";
   font-style: normal;

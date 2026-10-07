@@ -19,7 +19,7 @@ export const enterFullScreen = async (): Promise<void> => {
       else if (element.mozRequestFullScreen) element.mozRequestFullScreen();
       else if (element.webkitRequestFullscreen) element.webkitRequestFullscreen();
       
-      // Try to lock the keyboard to capture system keys like Cmd/Ctrl+W, Cmd/Ctrl+Space
+      // Keyboard lock allows the app to handle system-style shortcuts.
       if ('keyboard' in navigator && (navigator as any).keyboard && (navigator as any).keyboard.lock) {
          await (navigator as any).keyboard.lock();
       }

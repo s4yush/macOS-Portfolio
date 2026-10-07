@@ -6,7 +6,7 @@ import type { ChatMessage } from "~/utils/groq";
 
 type SiriPhase = "idle" | "recording" | "processing" | "speaking" | "error";
 
-// Suyash's resume context for conversational answers
+// Limit personal answers to details available in the portfolio.
 const SUYASH_INFO = `This portfolio belongs to Suyash Singh. His resume is available for download.`;
 
 const SIRI_FALLBACK = "Hey, I appreciate the curiosity! Suyash set me up to help navigate this portfolio — try asking me to open an app, play music, toggle dark mode, or check the time!";
@@ -27,7 +27,6 @@ IMPORTANT RULES:
 6. You can open the launchpad to show the portfolio's projects, open Spotify to play music, toggle fullscreen, and more.
 7. Never say "I am Suyash" — you are Siri, built by Suyash.`;
 
-//  Tool definitions 
 const TOOLS = [
   { type: "function", function: { name: "toggle_dark_mode", description: "Toggles the dark/light theme." } },
   { type: "function", function: { name: "play_music", description: "Plays the background music / song." } },
@@ -45,7 +44,6 @@ const TOOLS = [
   { type: "function", function: { name: "play_spotify", description: "Opens Spotify app to play music." } }
 ];
 
-//  Check browser SpeechRecognition support 
 const SpeechRecognitionAPI =
   typeof window !== "undefined"
     ? (window as any).SpeechRecognition || (window as any).webkitSpeechRecognition
@@ -63,21 +61,16 @@ export default function Siri({ closeSiri }: { closeSiri?: () => void }) {
   const vadLoopRef = useRef<number | null>(null);
 
   const apiKey = (import.meta.env.VITE_GROQ_API_KEY as string) || "";
-  // Always use Whisper (MediaRecorder + Groq API) — works in all browsers.
-  // The native SpeechRecognition API is Chrome/Edge-only, so we skip it.
   const useBrowserSTT = false;
 
-  // Store & audio context (use controls.play/pause to keep state in sync with TopBar)
   const { controls } = useAudioContext();
   const store = useStore();
 
-  // Preload voices
   useEffect(() => {
     window.speechSynthesis.getVoices();
     window.speechSynthesis.addEventListener("voiceschanged", () => window.speechSynthesis.getVoices());
   }, []);
 
-  //  Play siri.mp3 activation sound 
   const playSiriSound = useCallback((): Promise<void> => {
     return new Promise((resolve) => {
       const siriAudio = document.getElementById("siri-audio") as HTMLAudioElement | null;
@@ -85,7 +78,6 @@ export default function Siri({ closeSiri }: { closeSiri?: () => void }) {
         siriAudio.volume = 0.8;
         siriAudio.currentTime = 0;
         siriAudio.play().then(() => {
-          // Wait for the sound to finish (or 1.5s max)
           const timeout = setTimeout(resolve, 1500);
           siriAudio.onended = () => {
             clearTimeout(timeout);
@@ -93,7 +85,6 @@ export default function Siri({ closeSiri }: { closeSiri?: () => void }) {
             resolve();
           };
         }).catch((err) => {
-          // console.error("Siri sound play error:", err);
           resolve();
         });
       } else {
@@ -102,37 +93,18 @@ export default function Siri({ closeSiri }: { closeSiri?: () => void }) {
     });
   }, []);
 
-  //  DOM helpers 
   const openAppById = useCallback((id: string) => {
-    // console.log(`[DOM] Opening app: ${id}`);
     const el = document.querySelector(`#dock-${id}`) as HTMLElement | null;
-    if (el) {
-      el.click();
-      // console.log(`[DOM]  Clicked #dock-${id}`);
-    } else {
-      // console.warn(`[DOM]  #dock-${id} not found`);
-    }
+    el?.click();
   }, []);
 
   const closeAppById = useCallback((id: string) => {
-    // console.log(`[DOM] Closing app: ${id}`);
     const win = document.querySelector(`#window-${id}`) as HTMLElement | null;
-    if (win) {
-      const btn = win.querySelector("button.bg-red-500") as HTMLElement | null;
-      if (btn) {
-        btn.click();
-        // console.log(`[DOM]  Closed #window-${id}`);
-      } else {
-        // console.warn(`[DOM]  Close button not found in #window-${id}`);
-      }
-    } else {
-      // console.warn(`[DOM]  #window-${id} not found`);
-    }
+    const btn = win?.querySelector("button.bg-red-500") as HTMLElement | null;
+    btn?.click();
   }, []);
 
-  //  Download resume 
   const downloadResume = useCallback(() => {
-    // console.log("[Tool]  Triggering resume download");
     const link = document.createElement("a");
     link.href = "/resume.pdf";
     link.download = "Suyash_Singh_Resume.pdf";
@@ -142,36 +114,22 @@ export default function Siri({ closeSiri }: { closeSiri?: () => void }) {
     document.body.removeChild(link);
   }, []);
 
-  //  Tool executor 
   const executeTool = useCallback(async (name: string, args: any): Promise<string> => {
-    // console.log(`[Tool]  Executing: ${name}`, args);
 
     switch (name) {
       case "toggle_dark_mode": {
         store.toggleDark();
         const nowDark = !store.dark;
-        // console.log(`[Tool]  Dark mode: ${nowDark}`);
         return nowDark ? "Switched to dark mode." : "Switched to light mode.";
       }
 
       case "play_music": {
-        try {
-          // Use controls.play() so audioState syncs with TopBar control center
-          await controls.play();
-          // console.log("[Tool]  Music playing (synced with controls)");
-        } catch (err) {
-          // console.error("[Tool]  Play failed:", err);
-        }
+        await controls.play();
         return "Playing music now.";
       }
 
       case "pause_music": {
-        try {
-          controls.pause();
-          // console.log("[Tool]  Music paused (synced with controls)");
-        } catch (err) {
-          // console.error("[Tool]  Pause failed:", err);
-        }
+        controls.pause();
         return "Music paused.";
       }
 
@@ -179,25 +137,21 @@ export default function Siri({ closeSiri }: { closeSiri?: () => void }) {
         const v = Math.max(0, Math.min(100, Number(args?.level) || 50));
         store.setVolume(v);
         controls.volume(v / 100);
-        // console.log(`[Tool]  Volume: ${v}%`);
         return `Volume set to ${v}%.`;
       }
 
       case "set_brightness": {
         const b = Math.max(1, Math.min(100, Number(args?.level) || 50));
         store.setBrightness(b);
-        // console.log(`[Tool]  Brightness: ${b}%`);
         return `Brightness set to ${b}%.`;
       }
 
       case "toggle_wifi":
         store.toggleWIFI();
-        // console.log("[Tool]  WiFi toggled");
         return "Wi-Fi toggled.";
 
       case "toggle_bluetooth":
         store.toggleBluetooth();
-        // console.log("[Tool]  Bluetooth toggled");
         return "Bluetooth toggled.";
 
       case "open_app":
@@ -212,7 +166,6 @@ export default function Siri({ closeSiri }: { closeSiri?: () => void }) {
         const now = new Date();
         const time = now.toLocaleTimeString("en-US", { hour: "numeric", minute: "2-digit", hour12: true });
         const date = now.toLocaleDateString("en-US", { weekday: "long", month: "long", day: "numeric", year: "numeric" });
-        // console.log(`[Tool]  Time: ${time}`);
         return `It is ${time} on ${date}.`;
       }
 
@@ -232,7 +185,6 @@ export default function Siri({ closeSiri }: { closeSiri?: () => void }) {
             }
           }
         } catch (err) {
-          // console.error("[Tool] Fullscreen toggle failed:", err);
           return "Hmm, couldn't toggle full screen mode right now.";
         }
         return "Full screen mode toggled!";
@@ -249,17 +201,14 @@ export default function Siri({ closeSiri }: { closeSiri?: () => void }) {
       }
 
       default:
-        // console.warn(`[Tool]  Unknown tool: ${name}`);
         return "Done.";
     }
   }, [store, controls, openAppById, closeAppById, downloadResume]);
 
-  //  TTS 
   const speakText = useCallback((text: string) => {
     if (!text) { setPhase("idle"); return; }
     window.speechSynthesis.cancel();
     setPhase("speaking");
-    // console.log("[TTS] Speaking:", text);
 
     const utt = new SpeechSynthesisUtterance(text);
     const voices = window.speechSynthesis.getVoices();
@@ -271,19 +220,15 @@ export default function Siri({ closeSiri }: { closeSiri?: () => void }) {
     utt.rate = 1.0;
     utt.pitch = 1.1;
     utt.onend = () => {
-      // console.log("[TTS]  Done");
       setPhase("idle");
 
-      // Auto-close Siri after speaking
       setTimeout(() => {
         if (closeSiri) closeSiri(); else closeAppById('siri');
       }, 2000);
     };
     utt.onerror = (e) => {
-      // console.error("[TTS]  Error:", e);
       setPhase("idle");
 
-      // Auto-close on error as well
       setTimeout(() => {
         if (closeSiri) closeSiri(); else closeAppById('siri');
       }, 2000);
@@ -292,33 +237,29 @@ export default function Siri({ closeSiri }: { closeSiri?: () => void }) {
     setTimeout(() => window.speechSynthesis.speak(utt), 100);
   }, []);
 
-  //  Groq LLM Agent 
   const executeAgent = useCallback(async (userText: string) => {
     try {
       const messages: ChatMessage[] = [
         { role: "system", content: SYSTEM_PROMPT },
         { role: "user", content: userText }
       ];
-
-      // console.log("[Agent] Calling Groq with:", userText);
       const data = await getGroqChatCompletion(messages, apiKey, TOOLS);
       const msg = data.choices[0].message;
-      // console.log("[Agent] LLM response:", JSON.stringify(msg, null, 2));
 
       let reply = msg.content || "";
       let toolCalls = msg.tool_calls || [];
 
-      //  Handle Gemma-style raw text tool tags 
-      // Gemma often outputs tools as <function=tool_name>{"args": "..."}</function> instead of proper JSON tool calls
+      // Some models return tool calls as <function=name>...</function> text.
       const gemmaToolRegex = /<function=([^>]+)>(.*?)<\/function>/g;
       let match;
       while ((match = gemmaToolRegex.exec(reply)) !== null) {
         const toolName = match[1];
         const toolArgsStr = match[2];
         let args = {};
-        try { if (toolArgsStr) args = JSON.parse(toolArgsStr); } catch (e) { /* */ }
+        try {
+          if (toolArgsStr) args = JSON.parse(toolArgsStr);
+        } catch {}
 
-        // Add to our execution list
         toolCalls.push({
           id: `gemma-${Date.now()}`,
           type: "function",
@@ -326,15 +267,15 @@ export default function Siri({ closeSiri }: { closeSiri?: () => void }) {
         });
       }
 
-      // Clean the raw tags from the text so Siri doesn't speak "less than function equals..."
       reply = reply.replace(/<function=[^>]+>.*?<\/function>/g, "").trim();
 
       if (toolCalls && toolCalls.length > 0) {
-        // console.log(`[Agent] ${toolCalls.length} tool call(s)`);
         const results: string[] = [];
         for (const tc of toolCalls) {
           let args: any = {};
-          try { args = tc.function.arguments ? JSON.parse(tc.function.arguments) : {}; } catch (_e) { /* */ }
+          try {
+            args = tc.function.arguments ? JSON.parse(tc.function.arguments) : {};
+          } catch {}
           const result = await executeTool(tc.function.name, args);
           results.push(result);
         }
@@ -344,18 +285,14 @@ export default function Siri({ closeSiri }: { closeSiri?: () => void }) {
       if (!reply || !reply.trim()) {
         reply = SIRI_FALLBACK;
       }
-
-      // console.log("[Agent] Final reply:", reply);
       setResponseText(reply);
       speakText(reply);
     } catch (err: any) {
-      // console.error("[Agent]  Error:", err);
       setResponseText(SIRI_FALLBACK);
       speakText(SIRI_FALLBACK);
     }
   }, [apiKey, executeTool, speakText]);
 
-  //  Handle text input 
   const handleTextInput = useCallback(async (text: string) => {
     const cleaned = (text || "").trim();
     if (!cleaned) return;
@@ -365,10 +302,8 @@ export default function Siri({ closeSiri }: { closeSiri?: () => void }) {
     setInputText("");
   }, [executeAgent]);
 
-  //  Handle transcribed text 
   const handleTranscription = useCallback(async (text: string) => {
     const cleaned = (text || "").trim();
-    // console.log(`[STT] Transcription: "${cleaned}"`);
     if (!cleaned) {
       setResponseText("I didn't catch that. Please try again.");
       setPhase("idle");
@@ -379,7 +314,6 @@ export default function Siri({ closeSiri }: { closeSiri?: () => void }) {
     await executeAgent(cleaned);
   }, [executeAgent]);
 
-  //  Browser SpeechRecognition 
   const startBrowserSTT = useCallback(() => {
     if (!SpeechRecognitionAPI) return;
 
@@ -392,18 +326,15 @@ export default function Siri({ closeSiri }: { closeSiri?: () => void }) {
     recognition.onresult = (event: any) => {
       const transcript = event.results[0][0].transcript;
       const confidence = event.results[0][0].confidence;
-      // console.log(`[BrowserSTT] Result: "${transcript}" (confidence: ${confidence})`);
       setPhase("processing");
       handleTranscription(transcript);
     };
 
     recognition.onspeechend = () => {
-      // console.log("[BrowserSTT] Speech ended");
       recognition.stop();
     };
 
     recognition.onerror = (event: any) => {
-      // console.error("[BrowserSTT] Error:", event.error);
       if (event.error === "no-speech") {
         setResponseText("I didn't hear anything. Please try again.");
       } else if (event.error === "not-allowed") {
@@ -422,17 +353,14 @@ export default function Siri({ closeSiri }: { closeSiri?: () => void }) {
     recognition.start();
     setPhase("recording");
     setResponseText("");
-    // console.log("[BrowserSTT]  Listening...");
   }, [handleTranscription]);
 
   const stopBrowserSTT = useCallback(() => {
     if (recognitionRef.current) {
       recognitionRef.current.stop();
-      // console.log("[BrowserSTT]  Stopped");
     }
   }, []);
 
-  //  Whisper fallback 
   const startWhisperSTT = useCallback(async () => {
     try {
       setResponseText("");
@@ -465,13 +393,11 @@ export default function Siri({ closeSiri }: { closeSiri?: () => void }) {
           const text = await transcribeAudio(blob, apiKey);
           await handleTranscription(text);
         } catch (err: any) {
-          // console.error("[Whisper] Error:", err);
           setResponseText("Transcription failed.");
           setPhase("error");
         }
       };
 
-      // --- Voice Activity Detection (VAD) ---
       const audioContext = new (window.AudioContext || (window as any).webkitAudioContext)();
       const source = audioContext.createMediaStreamSource(stream);
       const analyser = audioContext.createAnalyser();
@@ -482,15 +408,14 @@ export default function Siri({ closeSiri }: { closeSiri?: () => void }) {
       const dataArray = new Uint8Array(bufferLength);
 
       let silenceStart = Date.now();
-      const SILENCE_THRESHOLD = 5; // Low volume threshold (out of 255)
-      const SILENCE_DURATION = 2000; // Stop after 2 seconds of silence
+      const SILENCE_THRESHOLD = 5; // Low-volume threshold on a 0–255 scale.
+      const SILENCE_DURATION = 2000; // Stop recording after 2 seconds of silence.
 
       const checkAudioLevel = () => {
         if (!mediaRecorderRef.current || mediaRecorderRef.current.state === "inactive") return;
 
         analyser.getByteFrequencyData(dataArray);
 
-        // Calculate average volume
         let sum = 0;
         for (let i = 0; i < bufferLength; i++) {
           sum += dataArray[i];
@@ -498,15 +423,11 @@ export default function Siri({ closeSiri }: { closeSiri?: () => void }) {
         const average = sum / bufferLength;
 
         if (average > SILENCE_THRESHOLD) {
-          // User is speaking, reset silence timer
           silenceStart = Date.now();
         } else {
-          // User is quiet, check if we've been quiet long enough
           if (Date.now() - silenceStart > SILENCE_DURATION) {
-            // Stop recording!
-            // console.log("[Whisper] Auto-stopping due to silence");
             stopWhisperSTT();
-            return; // stop loop
+            return;
           }
         }
 
@@ -514,22 +435,18 @@ export default function Siri({ closeSiri }: { closeSiri?: () => void }) {
       };
 
       vadLoopRef.current = requestAnimationFrame(checkAudioLevel);
-      // --- End VAD ---
 
       recorder.start(250);
       recordStartTimeRef.current = Date.now();
       mediaRecorderRef.current = recorder;
       setPhase("recording");
-      // console.log("[Whisper]  Recording...");
     } catch (err: any) {
-      // console.error("[Whisper] Mic error:", err);
       setResponseText("Microphone access denied.");
       setPhase("error");
     }
   }, [apiKey, handleTranscription]);
 
   const stopWhisperSTT = useCallback(() => {
-    // Stop VAD loop
     if (vadLoopRef.current) {
       cancelAnimationFrame(vadLoopRef.current);
       vadLoopRef.current = null;
@@ -545,19 +462,16 @@ export default function Siri({ closeSiri }: { closeSiri?: () => void }) {
     }
   }, []);
 
-  //  Auto-start on mount 
   const mountedRef = useRef(false);
   useEffect(() => {
     if (!mountedRef.current) {
       mountedRef.current = true;
-      // When Siri is opened from the dock, start listening.
       if (phase === "idle") {
         handleClick();
       }
     }
 
     return () => {
-      // Cleanup on unmount
       if (useBrowserSTT && recognitionRef.current) {
         try {
           recognitionRef.current.abort();
@@ -571,16 +485,13 @@ export default function Siri({ closeSiri }: { closeSiri?: () => void }) {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
-  //  Click handler: play siri.mp3, then start listening 
   const handleClick = useCallback(async () => {
     if (phase === "recording") {
-      // Stop recording
       if (useBrowserSTT) stopBrowserSTT();
       else stopWhisperSTT();
     } else if (phase === "idle" || phase === "error" || phase === "speaking") {
       window.speechSynthesis.cancel();
 
-      // Play Siri activation sound, then start listening
       setResponseText("");
       setPhase("recording");
       await playSiriSound();
@@ -590,7 +501,6 @@ export default function Siri({ closeSiri }: { closeSiri?: () => void }) {
     }
   }, [phase, useBrowserSTT, startBrowserSTT, stopBrowserSTT, startWhisperSTT, stopWhisperSTT, playSiriSound]);
 
-  //  Display 
   let statusText = "";
   if (phase === "recording") statusText = "Listening...";
   else if (phase === "processing") statusText = "Thinking...";
@@ -630,12 +540,10 @@ export default function Siri({ closeSiri }: { closeSiri?: () => void }) {
         }
       `}</style>
 
-      {/* Box Text (Siri's Response as a Large Glass Panel) */}
       <div
         className={`siri-glass-panel relative z-20 flex flex-col justify-center px-6 py-5 w-[320px] min-h-[120px] transition-all duration-400 ease-[cubic-bezier(0.16,1,0.3,1)] overflow-hidden ${boxText || statusText ? 'opacity-100 translate-y-0 scale-100' : 'opacity-0 -translate-y-4 scale-95 pointer-events-none'
           }`}
       >
-        {/* Header containing Siri icon and Title */}
         <div className="flex items-center gap-2 mb-2">
           <div className="w-5 h-5 rounded-md overflow-hidden bg-black/5 dark:bg-white/5 flex items-center justify-center">
             <img src="/img/icons/siri.png" className="w-full h-full object-cover" alt="Siri" />
@@ -645,7 +553,6 @@ export default function Siri({ closeSiri }: { closeSiri?: () => void }) {
           </span>
         </div>
 
-        {/* Content Area */}
         <div
           className="text-black/90 dark:text-white text-[16px] leading-relaxed font-medium tracking-tight font-sans drop-shadow-sm"
         >
@@ -656,7 +563,6 @@ export default function Siri({ closeSiri }: { closeSiri?: () => void }) {
           )}
         </div>
 
-        {/* Close Button on the Top-Right of the panel */}
         <button
           className="absolute top-4 right-4 w-6 h-6 flex items-center justify-center rounded-full bg-black/5 hover:bg-black/10 dark:bg-white/10 dark:hover:bg-white/20 text-black/50 dark:text-white/50 hover:text-black dark:hover:text-white transition-colors"
           onClick={(e) => {
@@ -670,10 +576,8 @@ export default function Siri({ closeSiri }: { closeSiri?: () => void }) {
         </button>
       </div>
 
-      {/* The Orb Container */}
       <div className="relative w-[180px] h-[180px] flex items-center justify-center flex-shrink-0">
 
-        {/* Environmental FX Aura underneath the orb */}
         <div className="absolute inset-0 flex justify-center items-center pointer-events-none z-0">
           <div
             className={`w-[140px] h-[140px] rounded-full mix-blend-screen transition-all duration-700 blur-[20px] ${isAuraActive ? 'siri-aura' : 'opacity-0 scale-90'}`}
@@ -684,13 +588,11 @@ export default function Siri({ closeSiri }: { closeSiri?: () => void }) {
           />
         </div>
 
-        {/* The Core: Transparent Audio-Reactive Orb */}
         <div
           className="relative z-10 flex justify-center items-center w-[130px] h-[130px] rounded-full cursor-pointer transform hover:scale-105 active:scale-95 transition-transform duration-300"
           onClick={handleClick}
           title="Tap to listen / Stop"
         >
-          {/* Specifically removed white backdrop behind the video */}
 
           <video
             src="/img/ui/siri2.webm"
@@ -702,7 +604,6 @@ export default function Siri({ closeSiri }: { closeSiri?: () => void }) {
           />
         </div>
 
-        {/* Close app button (appears only on hover of the orb area) */}
         <button
           className="absolute top-4 right-4 w-7 h-7 flex items-center justify-center rounded-full bg-black/40 text-white/70 hover:text-white hover:bg-black/80 transition-all opacity-0 group-hover:opacity-100 z-30 shadow-md backdrop-blur-sm"
           onClick={(e) => { e.stopPropagation(); if (closeSiri) closeSiri(); else closeAppById('siri'); }}

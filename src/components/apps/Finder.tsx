@@ -2,7 +2,6 @@ import React, { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { useWindowSize } from "~/hooks/useWindowSize";
 
-// ─── Types ───────────────────────────────────────────────────────────────────
 type ViewMode = "icons" | "list" | "columns";
 type SortKey = "name" | "date" | "size" | "kind";
 
@@ -18,7 +17,6 @@ interface FileItem {
   children?: FileItem[];
 }
 
-// ─── Mock Filesystem ─────────────────────────────────────────────────────────
 const FILESYSTEM: Record<string, FileItem[]> = {
   home: [
     {
@@ -140,7 +138,6 @@ const SIDEBAR_SECTIONS = [
   },
 ];
 
-// ─── File Icon Component ──────────────────────────────────────────────────────
 const FileIcon = ({ item, size = 56 }: { item: FileItem; size?: number }) => {
   if (item.kind === "folder") {
     let customImg = "/img/icons/folder-generic.png";
@@ -175,7 +172,6 @@ const FileIcon = ({ item, size = 56 }: { item: FileItem; size?: number }) => {
   );
 };
 
-// ─── Main Finder Component ───────────────────────────────────────────────────
 export default function Finder() {
   const [location, setLocation] = useState<string>("home");
   const [pathStack, setPathStack] = useState<string[]>(["home"]);
@@ -188,7 +184,6 @@ export default function Finder() {
   const isMobile = size.winWidth < 768;
   const [mobileView, setMobileView] = useState<"sidebar" | "content">("content");
 
-  // Get current items
   const currentItems = (): FileItem[] => {
     if (search.trim()) {
       const q = search.toLowerCase();
@@ -201,7 +196,6 @@ export default function Finder() {
     const rootItem = FILESYSTEM.home.find((f) => f.id === location);
     if (location === "home") return FILESYSTEM.home;
     if (rootItem?.children) return rootItem.children;
-    // nested
     for (const root of FILESYSTEM.home) {
       const nested = root.children?.find((c) => c.id === location);
       if (nested?.children) return nested.children;
@@ -246,7 +240,6 @@ export default function Finder() {
     return location;
   };
 
-  // ── Sidebar click handler ─────────────────────────────────────────────────
   const sidebarClick = (id: string, parent?: string) => {
     if (id === "google-drive" || id === "icloud-drive" || id === "macintosh-hd") {
       setLocation("home");
@@ -265,9 +258,7 @@ export default function Finder() {
     setMobileView("content");
   };
 
-  // ── Render items ──────────────────────────────────────────────────────────
 
-  // Helpers shared by Columns (miller) view
   const getChildrenOf = (id: string): FileItem[] => {
     if (id === "home") return FILESYSTEM.home;
     const root = FILESYSTEM.home.find((f) => f.id === id);
@@ -443,7 +434,6 @@ export default function Finder() {
 
   const renderList = () => (
     <div style={{ padding: "0" }}>
-      {/* List header */}
       <div
         style={{
           display: "grid",
@@ -523,7 +513,6 @@ export default function Finder() {
     </div>
   );
 
-  // ── Toolbar ───────────────────────────────────────────────────────────────
   const toolbarBtn = (label: string, icon: string, active = false, action = () => { }) => (
     <motion.button
       title={label}
@@ -559,7 +548,6 @@ export default function Finder() {
         overflow: "hidden",
       }}
     >
-      {/* ── Toolbar ── */}
       <div
         style={{
           display: "flex",
@@ -588,8 +576,7 @@ export default function Finder() {
             {mobileView === "sidebar" ? "Done" : "Browse"}
           </button>
         )}
-        
-        {/* Back / Forward */}
+
         <button
           onClick={goBack}
           disabled={pathStack.length <= 1}
@@ -611,7 +598,6 @@ export default function Finder() {
           ›
         </button>
 
-        {/* Location label */}
         <span
           style={{
             flex: 1,
@@ -624,14 +610,12 @@ export default function Finder() {
           {locationLabel()}
         </span>
 
-        {/* View mode */}
         <div style={{ display: "flex", gap: "2px" }}>
           {toolbarBtn("Icons", "⊞", viewMode === "icons", () => setViewMode("icons"))}
           {toolbarBtn("List", "≡", viewMode === "list", () => setViewMode("list"))}
           {toolbarBtn("Columns", "⊟", viewMode === "columns", () => setViewMode("columns"))}
         </div>
 
-        {/* Sort */}
         <select
           value={sortKey}
           onChange={(e) => setSortKey(e.target.value as SortKey)}
@@ -652,7 +636,6 @@ export default function Finder() {
           <option value="kind">Kind</option>
         </select>
 
-        {/* Search */}
         <div
           style={{
             display: "flex",
@@ -680,7 +663,6 @@ export default function Finder() {
         </div>
       </div>
 
-      {/* ── Tab strip (breadcrumb tabs) ── */}
       <div
         style={{
           display: "flex",
@@ -724,9 +706,7 @@ export default function Finder() {
         })}
       </div>
 
-      {/* ── Body ── */}
       <div style={{ display: "flex", flex: 1, overflow: "hidden" }}>
-        {/* Sidebar */}
         {(!isMobile || mobileView === "sidebar") && (
           <div
             style={{
@@ -826,7 +806,6 @@ export default function Finder() {
         </div>
         )}
 
-        {/* Content */}
         {(!isMobile || mobileView === "content") && (
         <div style={{ flex: 1, overflowY: "auto", overflowX: viewMode === "columns" && !search.trim() ? "auto" : "hidden" }}>
           <AnimatePresence mode="wait">
@@ -851,7 +830,6 @@ export default function Finder() {
         )}
       </div>
 
-      {/* ── Path bar ── */}
       <div
         style={{
           display: "flex",

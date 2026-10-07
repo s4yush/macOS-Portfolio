@@ -104,7 +104,9 @@ const Middlebar = ({ items, cur, setContent }: MiddlebarProps) => {
                   pos="absolute top-1 right-4"
                   href={item.link}
                   target="_blank"
-                  rel="noreferrer"
+                  rel="noopener noreferrer"
+                  aria-label={`Open ${item.title} in a new tab`}
+                  title={`Open ${item.title}`}
                 >
                   <span className="i-ph:link text-c-500" />
                 </a>
@@ -159,7 +161,7 @@ const Content = ({ contentID, contentURL }: ContentProps) => {
             storeMd[id] = fixImageURL(text, url);
             setStoreMd({ ...storeMd });
           })
-          .catch((error) => { /* console.error(error) */ });
+          .catch((error) => console.error("Failed to load portfolio note:", error));
       }
     },
     [storeMd]

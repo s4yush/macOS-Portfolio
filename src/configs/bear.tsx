@@ -11,21 +11,21 @@ const bear: BearData[] = [
         title: "About Me",
         file: "markdown/about-me.md",
         icon: "i-ph:shield-star",
-        excerpt: "Hey there! I'm the one who is building his own universe..."
+        excerpt: "A little about what I build, what I'm learning, and how to get in touch."
       },
       {
         id: "github-stats",
         title: "Github Stats",
         file: "markdown/github-stats.md",
         icon: "i-fa6-brands:github",
-        excerpt: "Here are some status about my github account..."
+        excerpt: "Explore my public GitHub activity and repositories."
       },
       {
         id: "about-site",
         title: "About This Site",
         file: "markdown/about-site.md",
         icon: "i-ph:browser",
-        excerpt: "Something about this personal portfolio site..."
+        excerpt: "The tools and ideas behind this macOS-inspired portfolio."
       }
     ]
   },
@@ -36,52 +36,43 @@ const bear: BearData[] = [
     md: [
       {
         id: "paytm-web",
-        title: "PaytmWeb",
-        file: "markdown/project-coming-soon.md",
+        title: "Paytm Web",
+        file: "markdown/paytm-web.md",
         icon: "i-ph:credit-card",
-        excerpt: "Coming soon"
+        excerpt: "Explore the Paytm Web project.",
+        link: "https://paytm-web.vercel.app/"
       },
       {
-        id: "portfolio-macos",
-        title: "Portfolio macOS",
-        file: "markdown/project-coming-soon.md",
-        icon: "i-ph:desktop",
-        excerpt: "Coming soon"
+        id: "skill-exchange",
+        title: "SkillExchange",
+        file: "markdown/skill-exchange.md",
+        icon: "i-ph:users-three",
+        excerpt: "A project about sharing skills.",
+        link: "https://skill-exchange-fe.vercel.app/"
       },
       {
-        id: "medium-2.0",
-        title: "Medium 2.0",
-        file: "markdown/project-coming-soon.md",
-        icon: "i-ph:globe",
-        excerpt: "Coming soon"
+        id: "share-code",
+        title: "ShareCode",
+        file: "markdown/share-code.md",
+        icon: "i-ph:code",
+        excerpt: "A project for sharing code.",
+        link: "https://share-your-codes.vercel.app/"
       },
       {
         id: "attendance-web",
-        title: "Mbm Attendance Web",
-        file: "markdown/project-coming-soon.md",
+        title: "MBM Attendance",
+        file: "markdown/attendance-web.md",
         icon: "i-ph:clipboard-text",
-        excerpt: "Coming soon"
+        excerpt: "An attendance-focused project.",
+        link: "https://mbm-attendance-web.vercel.app/"
       },
       {
-        id: "aero-pay",
-        title: "AeroPay",
-        file: "markdown/project-coming-soon.md",
-        icon: "i-ph:money",
-        excerpt: "Coming soon"
-      },
-      {
-        id: "bss",
-        title: "BSS",
-        file: "markdown/bss-coming-soon.md",
-        icon: "i-ph:rocket-launch",
-        excerpt: "Coming soon"
-      },
-      {
-        id: "rasl",
-        title: "rasl",
-        file: "markdown/project-coming-soon.md",
-        icon: "i-ph:headphones",
-        excerpt: "Coming soon"
+        id: "portfolio-macos",
+        title: "macOS Portfolio",
+        file: "markdown/portfolio-macos.md",
+        icon: "i-ph:desktop",
+        excerpt: "This portfolio, built as an interactive macOS-inspired desktop.",
+        link: "https://github.com/s4yush/macOS-Portfolio"
       }
     ]
   }

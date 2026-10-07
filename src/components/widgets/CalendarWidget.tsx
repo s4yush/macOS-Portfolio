@@ -30,7 +30,6 @@ export default function CalendarWidget({ compact }: CalendarWidgetProps) {
         fontFamily: "var(--font-system)",
       }}
     >
-      {/* Month header — red, uppercase, SF style */}
       <div style={{ marginBottom: 8 }}>
         <span style={{
           fontSize: compact ? 10 : 11,
@@ -44,7 +43,6 @@ export default function CalendarWidget({ compact }: CalendarWidgetProps) {
         </span>
       </div>
 
-      {/* Day of week labels */}
       <div style={{ display: "grid", gridTemplateColumns: "repeat(7, 1fr)", marginBottom: 3 }}>
         {dayLabels.map((d, i) => (
           <div key={i} style={{
@@ -59,7 +57,6 @@ export default function CalendarWidget({ compact }: CalendarWidgetProps) {
         ))}
       </div>
 
-      {/* Day cells */}
       <div style={{ display: "grid", gridTemplateColumns: "repeat(7, 1fr)", gap: compact ? 1 : 2 }}>
         {days.map((day) => {
           const isToday = isSameDay(day, today);

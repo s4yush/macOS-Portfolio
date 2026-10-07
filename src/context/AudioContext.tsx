@@ -12,10 +12,8 @@ interface AudioContextType {
   audioRef: React.RefObject<HTMLAudioElement>;
 }
 
-// Create the context with an initial undefined value
 const AudioContext = createContext<AudioContextType | undefined>(undefined);
 
-// Create a provider component
 export const AudioProvider: React.FC<{ children: ReactNode }> = ({ children }) => {
   const [audio, audioState, controls, audioRef] = useAudio({
     src: music.audio, 
@@ -29,7 +27,6 @@ export const AudioProvider: React.FC<{ children: ReactNode }> = ({ children }) =
   );
 };
 
-// Custom hook to use the audio context
 export const useAudioContext = () => {
   const context = useContext(AudioContext);
   if (!context) {

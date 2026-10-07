@@ -53,7 +53,6 @@ export default function MusicApp() {
   const [progress, setProgress] = useState(35);
   const [volume, setVolume] = useState(80);
 
-  // Simulate progress
   useEffect(() => {
     if (!audioState.playing) return;
     const t = setInterval(() => {
@@ -82,7 +81,7 @@ export default function MusicApp() {
         display: "flex",
         flexDirection: "column",
         height: "100%",
-        
+
         background: "var(--lg-bg)",
         backdropFilter: "var(--lg-blur-light)",
         WebkitBackdropFilter: "var(--lg-blur-light)",
@@ -91,7 +90,6 @@ export default function MusicApp() {
         color: "var(--c-text)",
       }}
     >
-      {/* Player bar (Top) */}
       <div
         style={{
           display: "flex",
@@ -106,7 +104,6 @@ export default function MusicApp() {
           flexShrink: 0
         }}
       >
-        {/* Controls */}
         <div style={{ display: "flex", alignItems: "center", gap: "20px", width: "180px" }}>
           <button
             style={{ background: "none", border: "none", color: "var(--c-text-secondary)", cursor: "pointer", padding: 0, display: "flex", alignItems: "center" }}
@@ -138,7 +135,6 @@ export default function MusicApp() {
           </button>
         </div>
 
-        {/* Track info & Progress (LCD Display) */}
         <div style={{ flex: 1, maxWidth: "500px", margin: "0 auto", background: "var(--c-bg-tertiary)", borderRadius: "8px", border: "1px solid var(--c-border)", padding: "6px 12px", display: "flex", flexDirection: "column", gap: "4px" }}>
           <div style={{ display: "flex", alignItems: "center", justifyContent: "center", gap: "8px" }}>
             <img src={activeTrack.cover} alt="" style={{ width: 20, height: 20, borderRadius: 4, objectFit: "cover", boxShadow: "0 1px 4px rgba(0,0,0,0.1)" }} />
@@ -146,7 +142,7 @@ export default function MusicApp() {
               {activeTrack.title} <span style={{ fontWeight: 400, color: "var(--c-text-secondary)" }}>— {activeTrack.artist}</span>
             </div>
           </div>
-          
+
           <div style={{ display: "flex", alignItems: "center", gap: "12px" }}>
             <span style={{ fontSize: "10px", color: "var(--c-text-tertiary)", minWidth: 28 }}>{fmt(progressSeconds)}</span>
             <div
@@ -162,7 +158,6 @@ export default function MusicApp() {
           </div>
         </div>
 
-        {/* Volume */}
         <div style={{ width: "180px", display: "flex", alignItems: "center", justifyContent: "flex-end", gap: "8px" }}>
           <span className="i-ph:speaker-low" style={{ width: "16px", height: "16px", color: "var(--c-text-secondary)" }} />
           <div style={{ width: "80px", height: 4, background: "var(--c-bg-tertiary)", borderRadius: 2, overflow: "hidden" }}>
@@ -173,7 +168,6 @@ export default function MusicApp() {
       </div>
 
       <div style={{ display: "flex", flex: 1, overflow: "hidden" }}>
-      {/* Sidebar */}
       <div
         style={{
           width: "200px",
@@ -188,7 +182,6 @@ export default function MusicApp() {
           gap: "4px"
         }}
       >
-        {/* Search */}
         <div style={{ marginBottom: "16px", padding: "0 8px" }}>
             <div style={{ display: "flex", alignItems: "center", background: "var(--c-bg-tertiary)", borderRadius: "6px", padding: "4px 8px", gap: "6px" }}>
                 <span className="i-ph:magnifying-glass" style={{ width: "12px", height: "12px", color: "var(--c-text-secondary)" }} />
@@ -261,9 +254,7 @@ export default function MusicApp() {
         ))}
       </div>
 
-      {/* Main content */}
       <div style={{ flex: 1, display: "flex", flexDirection: "column", overflow: "hidden" }}>
-        {/* Track list */}
         <div style={{ flex: 1, overflowY: "auto", padding: "24px 32px" }}>
           <div
             style={{

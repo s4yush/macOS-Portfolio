@@ -8,7 +8,7 @@ import {
   type MotionValue
 } from "framer-motion";
 
-// Hover effect is adopted from https://github.com/PuruVJ/macos-web/blob/main/src/components/dock/DockItem.tsx
+// Dock hover animation is adapted from https://github.com/PuruVJ/macos-web.
 
 const useDockHoverAnimation = (
   mouseX: MotionValue,
@@ -91,7 +91,7 @@ export default function DockItem({
   const imgRef = useRef<HTMLElement>(null);
   const { width } = useDockHoverAnimation(mouseX, imgRef, dockSize, dockMag);
   const { winWidth } = useWindowSize();
-  
+
   const [isReceiving, setIsReceiving] = React.useState(false);
   const wasOpen = React.useRef(isOpen);
 
@@ -177,7 +177,6 @@ export default function DockItem({
           content
         );
       })()}
-      {/* Shadow beneath icon */}
       <div
         aria-hidden
         style={{
@@ -190,7 +189,6 @@ export default function DockItem({
           pointerEvents: 'none',
         }}
       />
-      {/* Open indicator dot with pulse */}
       <motion.div
         animate={isOpen ? { scale: [1, 1.5, 1], opacity: [0.85, 1, 0.85] } : { scale: 0, opacity: 0 }}
         transition={isOpen ? { duration: 2, repeat: Infinity, ease: "easeInOut" } : { duration: 0.15 }}

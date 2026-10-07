@@ -109,13 +109,12 @@ export default function MessagesApp() {
       style={{
         display: "flex",
         height: "100%",
-        
+
         background: "rgba(248,248,250,0.99)",
         borderRadius: "0 0 14px 14px",
         overflow: "hidden",
       }}
     >
-      {/* Sidebar */}
       <div
         style={{
           width: "230px",
@@ -126,7 +125,6 @@ export default function MessagesApp() {
           flexDirection: "column",
         }}
       >
-        {/* Header */}
         <div
           style={{
             padding: "10px",
@@ -177,7 +175,6 @@ export default function MessagesApp() {
           </button>
         </div>
 
-        {/* Conversations */}
         <div style={{ flex: 1, overflowY: "auto" }}>
           {conversations.map((conv) => (
             <button
@@ -203,7 +200,6 @@ export default function MessagesApp() {
                 transition: "background 0.15s ease",
               }}
             >
-              {/* Avatar */}
               <div style={{ position: "relative", flexShrink: 0 }}>
                 <div
                   style={{
@@ -297,9 +293,7 @@ export default function MessagesApp() {
         </div>
       </div>
 
-      {/* Chat area */}
       <div style={{ flex: 1, display: "flex", flexDirection: "column", overflow: "hidden" }}>
-        {/* Header */}
         <div
           style={{
             padding: "10px 16px",
@@ -336,7 +330,6 @@ export default function MessagesApp() {
           </div>
         </div>
 
-        {/* Messages */}
         <div
           ref={scrollContainerRef}
           style={{
@@ -385,7 +378,6 @@ export default function MessagesApp() {
           </AnimatePresence>
         </div>
 
-        {/* Input */}
         <div
           style={{
             padding: "10px 12px",

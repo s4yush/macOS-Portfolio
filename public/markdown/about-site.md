@@ -1,5 +1,7 @@
 # About This Site
 
-This site is inspired by macOS [Big Sur](https://www.apple.com/in/macos/big-sur/) and [Catalina](https://www.apple.com/bw/macos/catalina/), developed using [React](https://reactjs.org/), [Zustand](https://zustand-demo.pmnd.rs/) and [UnoCSS](https://uno.antfu.me/), and hosted on [Github Pages](https://pages.github.com/). Some of the icons are generated using [sindresorhus/file-icon-cli](https://github.com/sindresorhus/file-icon-cli).
+This portfolio turns a personal website into a macOS-inspired desktop, complete with apps, windows, menus, and a mobile home screen.
 
-The source code is hosted [here](https://github.com/s4yush/macOS-Portfolio).
+It is built with [React](https://react.dev/), [TypeScript](https://www.typescriptlang.org/), [Vite](https://vite.dev/), [Zustand](https://zustand-demo.pmnd.rs/), and [UnoCSS](https://unocss.dev/).
+
+Explore the apps to learn more about me, browse projects, or download my resume. The source code is available on [GitHub](https://github.com/s4yush/macOS-Portfolio).

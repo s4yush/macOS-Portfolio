@@ -44,12 +44,11 @@ const saveSetting = (key: string, value: unknown) => {
   try {
     localStorage.setItem(`macos-settings-${key}`, JSON.stringify(value));
   } catch {
-    // localStorage may be unavailable
+    // Continue with in-memory settings when browser storage is blocked.
   }
 };
 
-// Resolve whether the dark class should be applied for a given appearance mode.
-// "auto" resolves to light by default (no system-preference hook in this env).
+// Automatic appearance currently defaults to light mode.
 const resolveDark = (mode: AppearanceMode): boolean => mode === "dark";
 
 const applyDarkClass = (dark: boolean) => {

@@ -30,10 +30,8 @@ export default function ClockWidget() {
         gap: 14,
       }}
     >
-      {/* Analog clock */}
       <svg width={54} height={54} viewBox="0 0 54 54">
         <circle cx={27} cy={27} r={26} fill="rgba(255,255,255,0.07)" stroke="rgba(255,255,255,0.15)" strokeWidth={0.5} />
-        {/* tick marks */}
         {Array.from({ length: 12 }).map((_, i) => {
           const angle = (i * 30 * Math.PI) / 180;
           const x1 = 27 + 22 * Math.sin(angle);
@@ -42,21 +40,18 @@ export default function ClockWidget() {
           const y2 = 27 - 24 * Math.cos(angle);
           return <line key={i} x1={x1} y1={y1} x2={x2} y2={y2} stroke="rgba(255,255,255,0.4)" strokeWidth={1} />;
         })}
-        {/* hour hand */}
         <line
           x1={27} y1={27}
           x2={27 + 13 * Math.sin((hrDeg * Math.PI) / 180)}
           y2={27 - 13 * Math.cos((hrDeg * Math.PI) / 180)}
           stroke="white" strokeWidth={2.5} strokeLinecap="round"
         />
-        {/* minute hand */}
         <line
           x1={27} y1={27}
           x2={27 + 18 * Math.sin((minDeg * Math.PI) / 180)}
           y2={27 - 18 * Math.cos((minDeg * Math.PI) / 180)}
           stroke="white" strokeWidth={1.8} strokeLinecap="round"
         />
-        {/* second hand */}
         <line
           x1={27} y1={27}
           x2={27 + 20 * Math.sin((secDeg * Math.PI) / 180)}
@@ -66,7 +61,6 @@ export default function ClockWidget() {
         <circle cx={27} cy={27} r={2} fill="white" />
       </svg>
 
-      {/* Digital */}
       <div>
         <div style={{ fontSize: 22, fontWeight: 300, color: "white", letterSpacing: "-0.5px", lineHeight: 1.1, fontVariantNumeric: "tabular-nums" }}>
           {format(now, "h:mm")}

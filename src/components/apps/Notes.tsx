@@ -103,7 +103,7 @@ export default function Notes() {
   const [search, setSearch] = useState("");
   const [activeSection, setActiveSection] = useState<"notes" | "shared">("notes");
   const textareaRef = useRef<HTMLTextAreaElement>(null);
-  
+
   const { winWidth } = useWindowSize();
   const isMobile = winWidth < 768;
   const [mobileView, setMobileView] = useState<"sidebar" | "list" | "editor">("list");
@@ -233,13 +233,12 @@ export default function Notes() {
       style={{
         display: "flex",
         height: "100%",
-        
+
         background: "rgba(250,250,248,0.99)",
         borderRadius: "0 0 14px 14px",
         overflow: "hidden",
       }}
     >
-      {/* ── Left sidebar (iCloud/sections) ── */}
       {(!isMobile || mobileView === "sidebar") && (
       <div
         style={{
@@ -252,7 +251,6 @@ export default function Notes() {
           paddingTop: "8px",
         }}
       >
-        {/* Header */}
         <div
           style={{
             padding: "6px 12px 8px",
@@ -279,7 +277,6 @@ export default function Notes() {
           </button>
         </div>
 
-        {/* iCloud section */}
         <div style={{ padding: "10px 0 4px" }}>
           <div style={{ fontSize: "10px", fontWeight: 700, color: "rgba(0,0,0,0.35)", textTransform: "uppercase", letterSpacing: "0.5px", padding: "0 12px 4px" }}>
             iCloud
@@ -332,7 +329,6 @@ export default function Notes() {
           </button>
         </div>
 
-        {/* Tags */}
         <div style={{ padding: "8px 12px 4px", borderTop: "0.5px solid rgba(0,0,0,0.06)" }}>
           <div style={{ fontSize: "10px", fontWeight: 700, color: "rgba(0,0,0,0.35)", textTransform: "uppercase", letterSpacing: "0.5px", marginBottom: "6px" }}>
             Tags
@@ -359,7 +355,6 @@ export default function Notes() {
       </div>
       )}
 
-      {/* ── Note list ── */}
       {(!isMobile || mobileView === "list") && (
       <div
         style={{
@@ -371,7 +366,6 @@ export default function Notes() {
           flexDirection: "column",
         }}
       >
-        {/* Search + new */}
         <div
           style={{
             padding: "8px 10px",
@@ -420,7 +414,6 @@ export default function Notes() {
           </button>
         </div>
 
-        {/* Grouped note list */}
         <div style={{ flex: 1, overflowY: "auto", paddingTop: "4px" }}>
           {pinned.length > 0 && (
             <>
@@ -440,12 +433,10 @@ export default function Notes() {
       </div>
       )}
 
-      {/* ── Editor ── */}
       {(!isMobile || mobileView === "editor") && (
         <div style={{ flex: 1, display: "flex", flexDirection: "column", overflow: "hidden", width: isMobile ? "100%" : "auto" }}>
       {activeNote ? (
         <div style={{ flex: 1, display: "flex", flexDirection: "column", overflow: "hidden" }}>
-          {/* Editor toolbar */}
           {isMobile && (
             <button onClick={() => setMobileView("list")} style={{ padding: "8px 12px", background: "none", border: "none", color: "#007AFF", fontWeight: 500, display: "flex", alignItems: "center", gap: "4px" }}>
               ‹ Back
@@ -491,14 +482,12 @@ export default function Notes() {
               </button>
             ))}
             <div style={{ flex: 1 }} />
-            {/* Search in note */}
             <button
               title="Search"
               style={{ background: "none", border: "none", cursor: "pointer", padding: "4px 6px", borderRadius: "6px", opacity: 0.55 }}
             >
               <img src="/img/icons/sf-icons/search.svg" alt="Search" style={{ width: "16px", height: "16px", opacity: 0.7 }} className="dark:invert" />
             </button>
-            {/* Delete */}
             <button
               onClick={() => deleteNote(activeNote.id)}
               title="Delete"
@@ -508,12 +497,10 @@ export default function Notes() {
             </button>
           </div>
 
-          {/* Date */}
           <div style={{ fontSize: "11px", color: "rgba(0,0,0,0.4)", padding: "10px 20px 0", textAlign: "center" }}>
             {activeNote.dateISO ?? activeNote.date}
           </div>
 
-          {/* Title */}
           <input
             value={activeNote.title}
             onChange={(e) => updateNote("title", e.target.value)}
@@ -529,7 +516,6 @@ export default function Notes() {
             }}
           />
 
-          {/* Body */}
           <textarea
             ref={textareaRef}
             value={activeNote.body}
@@ -544,7 +530,7 @@ export default function Notes() {
               color: "#1c1c1e",
               padding: "0 20px 20px",
               background: "transparent",
-              
+
             }}
           />
         </div>

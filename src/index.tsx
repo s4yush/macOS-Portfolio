@@ -13,8 +13,7 @@ import "katex/dist/katex.min.css";
 import "~/styles/index.css";
 import { AudioProvider } from "~/context/AudioContext";
 
-// macOS Tahoe transition variants
-// Login → Desktop: bright white bloom flash (exactly like macOS unlocking)
+// Match the bright transition shown when unlocking macOS.
 const loginExitVariants = {
   initial: { opacity: 1, scale: 1, filter: "brightness(1)" },
   exit: {
@@ -72,14 +71,11 @@ export default function App() {
   }));
   const activeWallpaper = getWallpaper();
 
-  // Sync the persisted appearance to the <html> dark class on mount.
   useEffect(() => {
     if (dark) document.documentElement.classList.add("dark");
     else document.documentElement.classList.remove("dark");
   }, [dark]);
 
-  // Drive icon-style + window-tint appearance from the root element so CSS
-  // can react globally (matches the dark-class pattern above).
   useEffect(() => {
     document.documentElement.dataset.iconStyle = iconStyle;
   }, [iconStyle]);
@@ -122,7 +118,6 @@ export default function App() {
 
   return (
     <div style={{ position: "relative", width: "100%", height: "100%", background: "transparent" }}>
-      {/* Persistent wallpaper — always visible, never absent during transitions */}
       <div
         style={{
           position: "absolute",
@@ -195,7 +190,6 @@ export default function App() {
         )}
       </AnimatePresence>
 
-      {/* White bloom flash — gentler fade-out on login→desktop */}
       <AnimatePresence>
         {login && (
           <motion.div

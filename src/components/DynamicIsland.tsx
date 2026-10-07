@@ -26,7 +26,6 @@ export default function DynamicIsland({ currentApp }: DynamicIslandProps) {
   const timerRef = useRef<ReturnType<typeof setInterval> | null>(null);
   const { audioState, controls } = useAudioContext();
 
-  // Auto-collapse after expand
   useEffect(() => {
     if (state === "expanded") {
       timeoutRef.current = setTimeout(() => {
@@ -38,7 +37,6 @@ export default function DynamicIsland({ currentApp }: DynamicIslandProps) {
     };
   }, [state]);
 
-  // Timer countdown display
   useEffect(() => {
     if (notification?.type === "timer" && notification.timerEnd) {
       const update = () => {
@@ -54,7 +52,6 @@ export default function DynamicIsland({ currentApp }: DynamicIslandProps) {
     }
   }, [notification]);
 
-  // Listen for notifications
   useEffect(() => {
     const handleNotification = (e: CustomEvent) => {
       const type: NotifType = e.detail?.type || "generic";
@@ -194,7 +191,6 @@ export default function DynamicIsland({ currentApp }: DynamicIslandProps) {
                   </div>
                 </div>
               ) : (
-                /* Now Playing content */
                 <div className="flex flex-col gap-2">
                   <div className="flex items-center gap-3">
                     <img
@@ -223,7 +219,6 @@ export default function DynamicIsland({ currentApp }: DynamicIslandProps) {
                       </button>
                     </div>
                   </div>
-                  {/* Progress bar */}
                   <div style={{ width: "100%", height: 3, borderRadius: 2, background: "rgba(255,255,255,0.15)", overflow: "hidden" }}>
                     <motion.div
                       style={{ height: "100%", borderRadius: 2, background: "var(--accent-green)", originX: 0 }}

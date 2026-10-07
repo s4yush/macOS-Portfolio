@@ -158,8 +158,7 @@ export default function ControlCenterMenu({
           }
         `}</style>
       )}
-      
-      {/* FULLSCREEN OVERLAY */}
+
       {isMobile && (
         <motion.div
           initial={{ opacity: 0 }}
@@ -177,7 +176,7 @@ export default function ControlCenterMenu({
           onClick={toggleControlCenter}
         />
       )}
-      
+
       <motion.div
         className={`text-c-black ${isMobile ? "mobile-cc" : ""}`}
         ref={controlCenterRef}
@@ -220,11 +219,9 @@ export default function ControlCenterMenu({
       >
         {isMobile ? (
           <div style={{ display: "flex", flexDirection: "column", gap: "12px", width: "100%" }}>
-            
-            {/* ROW 1: Connectivity & Now Playing */}
+
             <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: "12px", height: "160px" }}>
-              
-              {/* CONNECTIVITY TILE */}
+
               <div style={{ width: "100%", height: "160px", background: "rgba(44,44,48,0.95)", borderRadius: "20px", padding: "14px" }}>
                 <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: "10px", height: "100%" }}>
                   <motion.div whileTap={{ scale: 0.88 }} onClick={toggleAirdrop} style={{ width: "100%", height: "60px", borderRadius: "14px", background: airdrop ? "#0A84FF" : "rgba(28,28,30,0.9)", display: "flex", flexDirection: "column", alignItems: "center", justifyContent: "center", gap: "4px", cursor: "pointer" }}>
@@ -233,21 +230,21 @@ export default function ControlCenterMenu({
                     </svg>
                     <span style={{ fontSize: "10px", color: "rgba(255,255,255,0.7)" }}>AirDrop</span>
                   </motion.div>
-                  
+
                   <motion.div whileTap={{ scale: 0.88 }} style={{ width: "100%", height: "60px", borderRadius: "14px", background: "#0A84FF", display: "flex", flexDirection: "column", alignItems: "center", justifyContent: "center", gap: "4px", cursor: "pointer" }}>
                     <svg viewBox="0 0 24 24" fill="currentColor" style={{ width: "22px", height: "22px", color: "white" }}>
                       <path d="M15.5 5H13l2.5-3 2.5 3h-2.5zM13 19h2.5l-2.5 3-2.5-3H13zM3 6h2v12H3V6zm4-2h2v16H7V4zm4 2h2v12h-2V6zm4-4h2v16h-2V2z"/>
                     </svg>
                     <span style={{ fontSize: "10px", color: "rgba(255,255,255,0.7)" }}>Mobile Data</span>
                   </motion.div>
-                  
+
                   <motion.div whileTap={{ scale: 0.88 }} onClick={toggleWIFI} style={{ width: "100%", height: "60px", borderRadius: "14px", background: wifi ? "#0A84FF" : "rgba(28,28,30,0.9)", display: "flex", flexDirection: "column", alignItems: "center", justifyContent: "center", gap: "4px", cursor: "pointer" }}>
                     <svg viewBox="0 0 24 24" fill="currentColor" style={{ width: "22px", height: "22px", color: "white" }}>
                       <path d="M1 9l2 2c5.523-5.523 14.477-5.523 20 0l2-2C19.261 3.261 4.739 3.261 1 9zm8 8l3 3 3-3c-1.657-1.657-4.343-1.657-6 0zm-4-4l2 2c2.761-2.761 7.239-2.761 10 0l2-2C15.522 9.478 8.478 9.478 5 13z"/>
                     </svg>
                     <span style={{ fontSize: "10px", color: "rgba(255,255,255,0.7)" }}>Wi-Fi</span>
                   </motion.div>
-                  
+
                   <motion.div whileTap={{ scale: 0.88 }} onClick={toggleBluetooth} style={{ width: "100%", height: "60px", borderRadius: "14px", background: bluetooth ? "#0A84FF" : "rgba(28,28,30,0.9)", display: "flex", flexDirection: "column", alignItems: "center", justifyContent: "center", gap: "4px", cursor: "pointer" }}>
                     <svg viewBox="0 0 24 24" fill="currentColor" style={{ width: "22px", height: "22px", color: "white" }}>
                       <path d="M17.71 7.71L12 2h-1v7.59L6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 11 14.41V22h1l5.71-5.71-4.3-4.29 4.3-4.29zM13 5.83l1.88 1.88L13 9.59V5.83zm1.88 10.46L13 18.17v-3.76l1.88 1.88z"/>
@@ -257,7 +254,6 @@ export default function ControlCenterMenu({
                 </div>
               </div>
 
-              {/* NOW PLAYING TILE */}
               <div style={{ width: "100%", height: "160px", background: "rgba(50,40,70,0.9)", borderRadius: "20px", padding: "16px", display: "flex", flexDirection: "column", justifyContent: "space-between" }}>
                 <div style={{ display: "flex", alignItems: "center", gap: "8px" }}>
                   {playing ? (
@@ -296,10 +292,8 @@ export default function ControlCenterMenu({
               </div>
             </div>
 
-            {/* ROW 2: Toggles and Sliders */}
             <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: "12px" }}>
-              
-              {/* LEFT COLUMN: Rotation, Silent, Focus */}
+
               <div style={{ display: "flex", flexDirection: "column" }}>
                 <div style={{ display: "flex", flexDirection: "row", gap: "10px" }}>
                   <motion.div whileTap={{ scale: 0.88 }} onClick={() => setRotationLock(!rotationLock)} style={{ width: "58px", height: "58px", borderRadius: "50%", background: rotationLock ? "rgba(255,255,255,0.85)" : "rgba(255,255,255,0.18)", display: "flex", alignItems: "center", justifyContent: "center", cursor: "pointer", border: "none" }}>
@@ -313,8 +307,7 @@ export default function ControlCenterMenu({
                     </svg>
                   </motion.div>
                 </div>
-                
-                {/* FOCUS PILL */}
+
                 <motion.div whileTap={{ scale: 0.95 }} onClick={toggleFocus} style={{ marginTop: "10px", display: "flex", alignItems: "center", width: "100%", height: "46px", borderRadius: "14px", background: focusMode ? "rgba(90,60,140,0.7)" : "rgba(44,44,48,0.95)", padding: "0 14px", gap: "10px", cursor: "pointer" }}>
                   <svg viewBox="0 0 24 24" fill="currentColor" style={{ width: "18px", height: "18px", color: focusMode ? "#BF5AF2" : "#FFFFFF" }}>
                     <path d="M12 3c-4.97 0-9 4.03-9 9s4.03 9 9 9 9-4.03 9-9c0-.46-.04-.92-.1-1.36-.98 1.37-2.58 2.26-4.4 2.26-2.98 0-5.4-2.42-5.4-5.4 0-1.81.89-3.42 2.26-4.4-.44-.06-.9-.1-1.36-.1z"/>
@@ -326,20 +319,19 @@ export default function ControlCenterMenu({
                 </motion.div>
               </div>
 
-              {/* RIGHT COLUMN: Sliders */}
               <div style={{ display: "flex", flexDirection: "row", gap: "10px", height: "195px" }}>
                 <VerticalSlider
                   icon={<svg viewBox="0 0 24 24" fill="currentColor" style={{ width: "100%", height: "100%" }}><path d="M12 18c-3.31 0-6-2.69-6-6s2.69-6 6-6 6 2.69 6 6-2.69 6-6 6zm0-10c-2.21 0-4 1.79-4 4s1.79 4 4 4 4-1.79 4-4-1.79-4-4-4zm6.59-4.41l-1.41-1.41-2.12 2.12 1.41 1.41 2.12-2.12zM12 4V1h-2v3h2zm-5.66 1.76L4.22 3.64 2.81 5.05l2.12 2.12 1.41-1.41zM4 11H1v2h3v-2zm1.76 5.66l-2.12 2.12 1.41 1.41 2.12-2.12-1.41-1.41zM11 20v3h2v-3h-2zm5.66-1.76l2.12 2.12 1.41-1.41-2.12-2.12-1.41 1.41zM20 11v2h3v-2h-3z"/></svg>}
                   value={brightness}
                   setValue={setBrightness}
                 />
-                
+
                 <div style={{ display: "flex", alignItems: "flex-end", paddingBottom: "12px" }}>
                   <svg viewBox="0 0 24 24" fill="currentColor" style={{ width: "18px", height: "18px", color: "rgba(255,255,255,0.6)" }}>
                     <path d="M3.63 3.63c-.39.39-.39 1.02 0 1.41L7.29 8.7 7 9H3v6h4l5 5v-6.59l4.18 4.18c-.65.49-1.38.88-2.18 1.11v2.06c1.34-.3 2.57-.92 3.61-1.75l1.49 1.49c.39.39 1.02.39 1.41 0 .39-.39.39-1.02 0-1.41L5.05 3.63c-.39-.39-1.02-.39-1.42 0zM19 12c0 .82-.15 1.61-.41 2.34l1.53 1.53c.56-1.17.88-2.48.88-3.87 0-4.28-2.99-7.86-7-8.77v2.06c2.89.86 5 3.54 5 6.71zm-7-8l-1.88 1.88L12 7.76V4z"/>
                   </svg>
                 </div>
-                
+
                 <VerticalSlider
                   icon={<svg viewBox="0 0 24 24" fill="currentColor" style={{ width: "100%", height: "100%" }}><path d="M3 9v6h4l5 5V4L7 9H3zm13.5 3c0-1.77-1.02-3.29-2.5-4.03v8.05c1.48-.73 2.5-2.25 2.5-4.02zM14 3.23v2.06c2.89.86 5 3.54 5 6.71s-2.11 5.85-5 6.71v2.06c4.01-.91 7-4.49 7-8.77s-2.99-7.86-7-8.77z"/></svg>}
                   value={volume}
@@ -348,7 +340,6 @@ export default function ControlCenterMenu({
               </div>
             </div>
 
-            {/* ROW 3: Bottom Icons */}
             <div style={{ display: "flex", justifyContent: "space-between", padding: "0 6px", marginTop: "12px" }}>
               <motion.div whileTap={{ scale: 0.88 }} onClick={() => setFlashlight(!flashlight)} style={{ width: "64px", height: "64px", borderRadius: "50%", background: "rgba(44,44,48,0.95)", display: "flex", alignItems: "center", justifyContent: "center", cursor: "pointer" }}>
                 <svg viewBox="0 0 24 24" fill={flashlight ? "rgba(255, 214, 0, 0.9)" : "white"} style={{ width: "28px", height: "28px", color: flashlight ? "black" : "white" }}><path d="M7 2v11h3v9l7-12h-4l4-8z"/></svg>
@@ -366,7 +357,6 @@ export default function ControlCenterMenu({
           </div>
         ) : (
           <>
-            {/* Desktop Layout */}
             <div className="cc-grid row-span-2 col-span-2 p-2.5 flex flex-col justify-around space-y-1">
               <div className="hstack space-x-2">
                 <div className={`${wifi ? "cc-btn" : "cc-btn-active"}`} onClick={toggleWIFI}>
