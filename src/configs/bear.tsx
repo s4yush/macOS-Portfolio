@@ -35,44 +35,11 @@ const bear: BearData[] = [
     icon: "i-ph:git-branch",
     md: [
       {
-        id: "paytm-web",
-        title: "Paytm Web",
-        file: "markdown/paytm-web.md",
-        icon: "i-ph:credit-card",
-        excerpt: "Explore the Paytm Web project.",
-        link: "https://paytm-web.vercel.app/"
-      },
-      {
-        id: "skill-exchange",
-        title: "SkillExchange",
-        file: "markdown/skill-exchange.md",
-        icon: "i-ph:users-three",
-        excerpt: "A project about sharing skills.",
-        link: "https://skill-exchange-fe.vercel.app/"
-      },
-      {
-        id: "share-code",
-        title: "ShareCode",
-        file: "markdown/share-code.md",
-        icon: "i-ph:code",
-        excerpt: "A project for sharing code.",
-        link: "https://share-your-codes.vercel.app/"
-      },
-      {
-        id: "attendance-web",
-        title: "MBM Attendance",
-        file: "markdown/attendance-web.md",
-        icon: "i-ph:clipboard-text",
-        excerpt: "An attendance-focused project.",
-        link: "https://mbm-attendance-web.vercel.app/"
-      },
-      {
-        id: "portfolio-macos",
-        title: "macOS Portfolio",
-        file: "markdown/portfolio-macos.md",
-        icon: "i-ph:desktop",
-        excerpt: "This portfolio, built as an interactive macOS-inspired desktop.",
-        link: "https://github.com/s4yush/macOS-Portfolio"
+        id: "coming-soon",
+        title: "Coming Soon",
+        file: "markdown/coming-soon.md",
+        icon: "i-ph:rocket",
+        excerpt: "Your first project will go here. Stay tuned!"
       }
     ]
   }
